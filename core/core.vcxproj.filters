@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="assert.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="filesystem.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="heap.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="memory.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="json.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="random.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="assert.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="filesystem.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="heap.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="memory.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="random.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="ref_count.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="ref_ptr.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="smart_ptr.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="timer.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="types.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="core.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="json.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="pool_allocator.h">
+      <Filter>source</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

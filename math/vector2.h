@@ -10,6 +10,7 @@ struct vector2
 
 	vector2() : x(0.0f), y(0.0f) {}
 	vector2(float x, float y) : x(x), y(y) {}
+	vector2(int x, int y) : x(static_cast<float>(x)), y(static_cast<float>(y)) {}
 
 	void set(float x, float y) { this->x = x; this->y = y; }
 

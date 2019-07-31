@@ -7,25 +7,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="color.h">
+    <ClCompile Include="engine.cpp">
       <Filter>source</Filter>
-    </ClInclude>
-    <ClInclude Include="renderer.h">
-      <Filter>source</Filter>
-    </ClInclude>
-    <ClInclude Include="texture.h">
-      <Filter>source</Filter>
-    </ClInclude>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="color.cpp">
+    <ClInclude Include="engine.h">
       <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="renderer.cpp">
+    </ClInclude>
+    <ClInclude Include="system.h">
       <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="texture.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
+    </ClInclude>
   </ItemGroup>
 </Project>

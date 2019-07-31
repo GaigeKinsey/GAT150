@@ -1,16 +1,15 @@
+#include "..\\engine\engine.h"
 #include "..\\math\vector2.h"
+#include "..\\renderer\texture.h"
 #include <SDL.h>
-#include <iostream>
 
 int main(int argc, char* args[])
 {
-	SDL_Init(SDL_INIT_VIDEO);
-	SDL_Window* window = SDL_CreateWindow("game", 30, 30, 800, 600, 0);
-	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	Engine engine;
+	engine.Startup();
 
-	SDL_Surface* surface = SDL_LoadBMP("textures/ghost.bmp");
-	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
-	SDL_FreeSurface(surface);
+	Texture texture(engine.GetRenderer());
+	texture.Create("textures/ghost.bmp");
 
 	float angle(0.0f);
 	vector2 position(30.0f, 30.0f);
@@ -36,24 +35,20 @@ int main(int argc, char* args[])
 				case SDLK_DOWN:
 					angle -= 1.0f;
 					break;
+				default:
+					break;
 				}
 			}
 		}
+		engine.Update();
 
-		SDL_RenderClear(renderer);
+		engine.GetRenderer()->BeginFrame();
 
-		SDL_Rect dest = { position.x, position.y, 32, 32 };
-		SDL_QueryTexture(texture, 0, 0, &dest.w, &dest.h);
+		texture.Draw(position, vector2(0, 0), vector2::one, angle);
 
-		//SDL_RenderCopy(renderer, texture, NULL, &dest);
-		SDL_RenderCopyEx(renderer, texture, NULL, &dest, angle, 0, SDL_FLIP_NONE);
-
-		SDL_RenderPresent(renderer);
+		engine.GetRenderer()->EndFrame();
 	}
-
-	SDL_DestroyRenderer(renderer);
-	SDL_DestroyWindow(window);
-	SDL_Quit();
+	engine.Shutdown();
 
 	return 0;
 }

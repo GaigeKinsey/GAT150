@@ -1,17 +1,19 @@
 #pragma once
+#include "..\\engine\system.h"
 #include "..\\external\fmod\api\core\inc\fmod.hpp"
-#include "..\\framework\singleton.h"
 
 #include <string>
 #include <map>
 
-class AudioSystem : public Singleton<AudioSystem>{
+class AudioSystem : public System {
 public:
-	AudioSystem() {}
+	AudioSystem(Engine* engine) : System(engine) {}
 public:
 	bool Startup();
 	void Shutdown();
+
 	void Update();
+
 	void AddSound(const std::string& key, const char* filename);
 	void PlaySounds(const std::string& key, bool loop = false);
 	void RemoveSound(const std::string& id);

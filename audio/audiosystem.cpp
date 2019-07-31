@@ -9,6 +9,7 @@ bool AudioSystem::Startup()
 	void* extradriverdata = nullptr;
 	result = m_system->init(32, FMOD_INIT_NORMAL, extradriverdata);
 	ASSERT_MSG(result == FMOD_OK, "Error initializing FMOD system.");
+
 	return true;
 }
 

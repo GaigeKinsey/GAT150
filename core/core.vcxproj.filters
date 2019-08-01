@@ -25,6 +25,9 @@
     <ClCompile Include="random.cpp">
       <Filter>source</Filter>
     </ClCompile>
+    <ClCompile Include="name.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="assert.h">
@@ -64,6 +67,9 @@
       <Filter>source</Filter>
     </ClInclude>
     <ClInclude Include="pool_allocator.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="name.h">
       <Filter>source</Filter>
     </ClInclude>
   </ItemGroup>

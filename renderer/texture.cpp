@@ -5,7 +5,7 @@ Texture::~Texture()
 	Destroy();
 }
 
-bool Texture::Create(const std::string& name)
+bool Texture::Create(const Name& name)
 {
 	SDL_Surface* surface = SDL_LoadBMP(name.c_str());
 	m_texture = SDL_CreateTextureFromSurface(m_renderer->GetSDLRenderer(), surface);
@@ -22,15 +22,23 @@ void Texture::Destroy()
 	}
 }
 
-void Texture::Draw(const vector2& position, const vector2& origin, const vector2& scale, float angle)
+void Texture::Draw(const vector2& position, float angle, const vector2 & scale, const vector2 & origin)
 {
-	SDL_Rect dest = { position.x, position.y, 0, 0 };
-	SDL_Point point;
-	SDL_QueryTexture(m_texture, 0, 0, &point.x, &point.y);
-	dest.w = point.x;
-	dest.h = point.y;
+	vector2 size = GetSize();
+	size = size * scale;
 
-	SDL_RenderCopyEx(m_renderer->GetSDLRenderer(), m_texture, NULL, &dest, angle, 0, SDL_FLIP_NONE);
+	vector2 screen_position = position - (size * origin);
+
+	SDL_Rect dest;
+	dest.x = static_cast<int>(screen_position.x);
+	dest.y = static_cast<int>(screen_position.y);
+	dest.w = static_cast<int>(size.x);
+	dest.h = static_cast<int>(size.y);
+
+	vector2 rotation_point = size * origin;
+	SDL_Point point = { static_cast<int>(rotation_point.x), static_cast<int>(rotation_point.y) };
+
+	SDL_RenderCopyEx(m_renderer->GetSDLRenderer(), m_texture, NULL, &dest, angle, &point, SDL_FLIP_NONE);
 }
 
 vector2 Texture::GetSize() const

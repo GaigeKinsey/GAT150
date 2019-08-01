@@ -7,19 +7,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="factory.h">
+    <ClInclude Include="resource.h">
       <Filter>source</Filter>
     </ClInclude>
-    <ClInclude Include="singleton.h">
+    <ClInclude Include="resource_manager.h">
       <Filter>source</Filter>
     </ClInclude>
-    <ClInclude Include="manager.h">
-      <Filter>source</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="factory.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

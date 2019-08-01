@@ -2,17 +2,18 @@
 
 #include "renderer.h"
 #include "..\\math\vector2.h"
+#include "..\\resources\resource.h"
 
-class Texture
+class Texture : public Resource
 {
 public:
 	Texture(Renderer* renderer) : m_renderer(renderer) {}
 	~Texture();
 
-	bool Create(const std::string& name);
+	bool Create(const Name& name);
 	void Destroy();
 
-	void Draw(const vector2& position, const vector2& origin = vector2::zero, const vector2& scale = vector2::one, float angle = 0);
+	void Draw(const vector2& position, float angle = 0.0f, const vector2 & scale = vector2::one, const vector2& origin = vector2::zero);
 	vector2 GetSize() const;
 
 protected:

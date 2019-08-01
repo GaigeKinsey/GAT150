@@ -24,6 +24,7 @@
     <ClCompile Include="heap.cpp" />
     <ClCompile Include="json.cpp" />
     <ClCompile Include="memory.cpp" />
+    <ClCompile Include="name.cpp" />
     <ClCompile Include="random.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -33,6 +34,7 @@
     <ClInclude Include="heap.h" />
     <ClInclude Include="json.h" />
     <ClInclude Include="memory.h" />
+    <ClInclude Include="name.h" />
     <ClInclude Include="pool_allocator.h" />
     <ClInclude Include="random.h" />
     <ClInclude Include="ref_count.h" />

@@ -1,7 +1,10 @@
 #include "engine.h"
+#include "..\\core\filesystem.h"
 
 bool Engine::Startup()
 {
+	filesystem::set_current_path("../");
+
 	m_audioSystem = new AudioSystem(this);
 	m_audioSystem->Startup();
 

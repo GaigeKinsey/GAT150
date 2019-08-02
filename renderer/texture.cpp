@@ -7,7 +7,7 @@ Texture::~Texture()
 
 bool Texture::Create(const Name& name)
 {
-	SDL_Surface* surface = SDL_LoadBMP(name.c_str());
+	SDL_Surface* surface = IMG_Load(name.c_str());
 	m_texture = SDL_CreateTextureFromSurface(m_renderer->GetSDLRenderer(), surface);
 	SDL_FreeSurface(surface);
 

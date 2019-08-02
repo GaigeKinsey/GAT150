@@ -26,6 +26,7 @@
     <ClCompile Include="memory.cpp" />
     <ClCompile Include="name.cpp" />
     <ClCompile Include="random.cpp" />
+    <ClCompile Include="string.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="assert.h" />
@@ -40,6 +41,7 @@
     <ClInclude Include="ref_count.h" />
     <ClInclude Include="ref_ptr.h" />
     <ClInclude Include="smart_ptr.h" />
+    <ClInclude Include="string.h" />
     <ClInclude Include="timer.h" />
     <ClInclude Include="types.h" />
   </ItemGroup>

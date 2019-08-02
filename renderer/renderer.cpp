@@ -3,12 +3,14 @@
 bool Renderer::Startup()
 {
 	SDL_Init(SDL_INIT_VIDEO);
+	IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
 
 	return true;
 }
 
 void Renderer::Shutdown()
 {
+	IMG_Quit();
 	SDL_DestroyRenderer(m_renderer);
 	SDL_DestroyWindow(m_window);
 }

@@ -28,6 +28,9 @@
     <ClCompile Include="name.cpp">
       <Filter>source</Filter>
     </ClCompile>
+    <ClCompile Include="string.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="assert.h">
@@ -70,6 +73,9 @@
       <Filter>source</Filter>
     </ClInclude>
     <ClInclude Include="name.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="string.h">
       <Filter>source</Filter>
     </ClInclude>
   </ItemGroup>

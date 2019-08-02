@@ -9,7 +9,7 @@ int main(int argc, char* args[])
 	Engine engine;
 	engine.Startup();
 
-	Name texture_name("textures/ghost.bmp");
+	Name texture_name("textures/tree01.png");
 	ResourceManager<Texture> texture_manager(engine.GetRenderer());
 
 	float angle(0.0f);

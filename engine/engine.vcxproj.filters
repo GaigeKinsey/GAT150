@@ -10,12 +10,30 @@
     <ClCompile Include="engine.cpp">
       <Filter>source</Filter>
     </ClCompile>
+    <ClCompile Include="entity.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="scene.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine.h">
       <Filter>source</Filter>
     </ClInclude>
     <ClInclude Include="system.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="component.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="entity.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="object.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="scene.h">
       <Filter>source</Filter>
     </ClInclude>
   </ItemGroup>

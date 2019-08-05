@@ -152,9 +152,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="engine.cpp" />
+    <ClCompile Include="entity.cpp" />
+    <ClCompile Include="scene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="component.h" />
     <ClInclude Include="engine.h" />
+    <ClInclude Include="entity.h" />
+    <ClInclude Include="object.h" />
+    <ClInclude Include="scene.h" />
     <ClInclude Include="system.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

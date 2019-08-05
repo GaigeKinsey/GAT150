@@ -1,8 +1,10 @@
 #include "engine.h"
 #include "..\\core\filesystem.h"
+#include "..\\core\name.h"
 
 bool Engine::Startup()
 {
+	Name::AllocNames();
 	filesystem::set_current_path("../");
 
 	m_audioSystem = new AudioSystem(this);
@@ -22,6 +24,8 @@ void Engine::Shutdown()
 
 	m_audioSystem->Shutdown();
 	delete m_audioSystem;
+
+	Name::FreeNames();
 
 	SDL_Quit();
 }

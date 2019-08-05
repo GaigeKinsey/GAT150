@@ -6,24 +6,27 @@
 class Name
 {
 public:
+	Name() : m_id(0), m_index(0) {};
 	Name(const char* string);
 
-	bool operator == (const Name& other);
-	bool operator != (const Name& other);
+	bool operator == (const Name& other) const;
+	bool operator != (const Name& other) const;
 
 	std::string ToString() const;
 	const char* c_str() const;
 
-	u32 GetID() const { return m_id; }
+	size_t GetID() const { return m_id; }
+
+	static void AllocNames();
+	static void FreeNames();
 
 private:
-	u32 m_id;
-	u32 m_index;
+	size_t m_id;
+	size_t m_index;
 
-	static const u32 MAX_ENTRIES = 65536;
-	static const u32 MAX_NAME_SIZE = 64;
-	using entries = char[MAX_ENTRIES][MAX_NAME_SIZE]; // (2^16 * 64) = 4,194,304
+	static const size_t MAX_ENTRIES = 65536;
+	static const size_t MAX_NAME_SIZE = 64;
 	
-	static entries ms_names;
+	static char* ms_names;
 };
 

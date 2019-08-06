@@ -19,7 +19,7 @@ void Renderer::Update()
 {
 }
 
-void Renderer::CreateWindow(const std::string& name, int width, int height)
+void Renderer::Create(const std::string& name, int width, int height)
 {
 	m_window = SDL_CreateWindow(name.c_str(), 30, 30, width, height, 0);
 	m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);

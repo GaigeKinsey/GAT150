@@ -15,7 +15,7 @@ public:
 	void Shutdown();
 	void Update();
 
-	void CreateWindow(const std::string& name, int width, int height);
+	void Create(const std::string& name, int width, int height);
 	void BeginFrame();
 	void EndFrame();
 

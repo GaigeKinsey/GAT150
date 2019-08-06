@@ -1,8 +1,12 @@
 #include "entity.h"
 #include "component.h"
+#include "render_component.h"
 
-bool Entity::Create()
+bool Entity::Create(const Name& name, Scene* scene)
 {
+	m_name = name;
+	m_scene = scene;
+
 	return true;
 }
 
@@ -30,9 +34,11 @@ void Entity::Update()
 
 void Entity::Draw()
 {
-	//for (Component* component : m_components) {
-	//	component->Draw();
-	//}
+	m_transform.update();
+	RenderComponent* component = GetComponent<RenderComponent>();
+	if (component) {
+		component->Draw();
+	}
 }
 
 void Entity::AddComponent(Component* component)

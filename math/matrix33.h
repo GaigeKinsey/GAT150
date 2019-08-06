@@ -7,7 +7,7 @@ public:
 	float m[3][3];
 
 public:
-	matrix33() {}
+	matrix33() : m() {}
 
 	void set_identity() {
 		m[0][0] = 1.0f; m[1][0] = 0.0f; m[2][0] = 0.0f;

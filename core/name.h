@@ -11,6 +11,7 @@ public:
 
 	bool operator == (const Name& other) const;
 	bool operator != (const Name& other) const;
+	bool operator  < (const Name& other) const;
 
 	std::string ToString() const;
 	const char* c_str() const;

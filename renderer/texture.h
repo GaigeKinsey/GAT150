@@ -7,7 +7,7 @@
 class Texture : public Resource
 {
 public:
-	Texture(Renderer* renderer) : m_renderer(renderer) {}
+	Texture(Renderer* renderer) : m_renderer(renderer), m_texture(nullptr) {}
 	~Texture();
 
 	bool Create(const Name& name);

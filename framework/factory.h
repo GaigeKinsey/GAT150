@@ -36,7 +36,8 @@ class Factory
 public:
 	~Factory();
 
-	TBase* Create(TKey key);
+	template<typename T = TBase>
+	T* Create(TKey key);
 	void Register(TKey key, CreatorBase<TBase>* creator);
 
 private:
@@ -55,7 +56,8 @@ inline Factory<TBase, TKey>::~Factory()
 }
 
 template<typename TBase, typename TKey>
-inline TBase* Factory<TBase, TKey>::Create(TKey key)
+template<typename T>
+inline T* Factory<TBase, TKey>::Create(TKey key)
 {
 	auto iter = m_registry.find(key);
 	if (iter == m_registry.end()) {
@@ -64,7 +66,7 @@ inline TBase* Factory<TBase, TKey>::Create(TKey key)
 
 	CreatorBase<TBase>* creator = (*iter).second;
 
-	return creator->Create();
+	return dynamic_cast<T*>(creator->Create());
 }
 
 template<typename TBase, typename TKey>

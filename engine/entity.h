@@ -8,9 +8,9 @@ class Component;
 class Entity : public Object
 {
 public:
-	Entity(const Name& name, Scene* scene) : Object(name), m_scene(scene) {}
+	Entity() : m_scene(nullptr) {}
 
-	bool Create() override;
+	bool Create(const Name& name, Scene* scene);
 	void Destroy() override;
 	bool Load(const rapidjson::Value& value) override;
 
@@ -40,10 +40,12 @@ public:
 
 	Scene* GetScene() { return m_scene; }
 
+public:
+	transform m_transform;
+
 protected:
 	Name m_tag;
-	transform m_transform;
-	Scene* m_scene;
+	Scene* m_scene = nullptr;
 
 	std::vector<Component*> m_components;
 };

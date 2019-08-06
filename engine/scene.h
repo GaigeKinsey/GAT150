@@ -1,16 +1,20 @@
 #pragma once
 #include "object.h"
+#include "component.h"
+#include "..\\framework\factory.h"
 #include <list>
 
 class Engine;
 class Entity;
 
+class ComponentFactory : public Factory<Component, Name> {};
+
 class Scene : public Object
 {
 public:
-	Scene(const Name& name, Engine* engine) : Object(name), m_engine(engine) { }
+	Scene() : m_engine(nullptr), m_component_factory(nullptr) {}
 
-	bool Create() override;
+	bool Create(const Name& name, Engine* engine);
 	void Destroy() override;
 	bool Load(const rapidjson::Value& value) override;
 
@@ -26,7 +30,7 @@ public:
 	Engine* GetEngine() { return m_engine; }
 
 protected:
-	Engine* m_engine;
-
+	Engine* m_engine = nullptr;
+	ComponentFactory* m_component_factory = nullptr;
 	std::list<Entity*> m_entities;
 };

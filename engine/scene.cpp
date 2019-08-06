@@ -1,8 +1,34 @@
 #include "scene.h"
 #include "entity.h"
+#include "sprite_component.h"
+#include "controller_component.h"
 
-bool Scene::Create()
+bool Scene::Create(const Name& name, Engine* engine)
 {
+	m_name = name;
+	m_engine = engine;
+
+	m_component_factory = new ComponentFactory;
+	m_component_factory->Register("sprite_component", new Creator<SpriteComponent, Component>());
+	m_component_factory->Register("controller_component", new Creator<ControllerComponent, Component>());
+
+	Entity* entity = new Entity();
+	entity->Create("entity", this);
+	entity->m_transform.scale = vector2::one;
+
+	{
+		SpriteComponent* component = m_component_factory->Create<SpriteComponent>("sprite_component");
+		component->Create("component", entity, "textures/ghost.bmp");
+		entity->AddComponent(component);
+	}
+	{
+		ControllerComponent* component = m_component_factory->Create<ControllerComponent>("controller_component");
+		component->Create("component", entity);
+		entity->AddComponent(component);
+	}
+
+	Add(entity);
+
 	return true;
 }
 
@@ -14,6 +40,8 @@ void Scene::Destroy()
 	}
 
 	m_entities.clear();
+
+	delete m_component_factory;
 }
 
 bool Scene::Load(const rapidjson::Value& value)

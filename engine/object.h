@@ -5,9 +5,8 @@
 class Object
 {
 public:
-	Object(const Name& name) : m_name(name) {}
-	
-	virtual bool Create() = 0;
+	Object() {}
+
 	virtual void Destroy() = 0;
 	virtual bool Load(const rapidjson::Value& value) = 0;
 

@@ -26,6 +26,11 @@ bool Name::operator!=(const Name& other) const
 	return (m_id != other.m_id);
 }
 
+bool Name::operator<(const Name& other) const
+{
+	return (m_id < other.m_id);
+}
+
 std::string Name::ToString() const
 {
 	return std::string(c_str());

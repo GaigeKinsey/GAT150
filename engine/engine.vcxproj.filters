@@ -5,6 +5,9 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="source\components">
+      <UniqueIdentifier>{09940b77-6303-4abe-83ce-e07ca71d1ae6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engine.cpp">
@@ -15,6 +18,12 @@
     </ClCompile>
     <ClCompile Include="scene.cpp">
       <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="sprite_component.cpp">
+      <Filter>source\components</Filter>
+    </ClCompile>
+    <ClCompile Include="controller_component.cpp">
+      <Filter>source\components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -35,6 +44,15 @@
     </ClInclude>
     <ClInclude Include="scene.h">
       <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="controller_component.h">
+      <Filter>source\components</Filter>
+    </ClInclude>
+    <ClInclude Include="render_component.h">
+      <Filter>source\components</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite_component.h">
+      <Filter>source\components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

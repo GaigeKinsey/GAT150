@@ -15,6 +15,7 @@ public:
 	}
 	virtual void Update() = 0;
 
+	void SetOwner(class Entity* owner) { m_owner = owner; }
 	Entity* GetOwner() { return m_owner; }
 
 protected:

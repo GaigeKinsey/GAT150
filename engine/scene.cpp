@@ -2,6 +2,7 @@
 #include "entity.h"
 #include "sprite_component.h"
 #include "controller_component.h"
+#include "physics_component.h"
 
 bool Scene::Create(const Name& name, Engine* engine)
 {
@@ -11,23 +12,7 @@ bool Scene::Create(const Name& name, Engine* engine)
 	m_component_factory = new ComponentFactory;
 	m_component_factory->Register("sprite_component", new Creator<SpriteComponent, Component>());
 	m_component_factory->Register("controller_component", new Creator<ControllerComponent, Component>());
-
-	Entity* entity = new Entity();
-	entity->Create("entity", this);
-	entity->m_transform.scale = vector2::one;
-
-	{
-		SpriteComponent* component = m_component_factory->Create<SpriteComponent>("sprite_component");
-		component->Create("component", entity, "textures/ghost.bmp");
-		entity->AddComponent(component);
-	}
-	{
-		ControllerComponent* component = m_component_factory->Create<ControllerComponent>("controller_component");
-		component->Create("component", entity);
-		entity->AddComponent(component);
-	}
-
-	Add(entity);
+	m_component_factory->Register("physics_component", new Creator<PhysicsComponent, Component>());
 
 	return true;
 }
@@ -46,14 +31,25 @@ void Scene::Destroy()
 
 bool Scene::Load(const rapidjson::Value& value)
 {
-	return false;
+	const rapidjson::Value& entities_value = value["entities"];
+	if (entities_value.IsArray()) {
+		LoadEntities(entities_value);
+	}
+
+	return true;
 }
 
 void Scene::Update()
 {
 	for (Entity* entity : m_entities) {
 		entity->Update();
+
+		if (entity->m_transform.translation.x < 0.0f) entity->m_transform.translation.x = 800.0f;
+		if (entity->m_transform.translation.x > 800.0f) entity->m_transform.translation.x = 0.0f;
+		if (entity->m_transform.translation.y > 600.0f) entity->m_transform.translation.y = 0.0f;
+		if (entity->m_transform.translation.y < 0.0f) entity->m_transform.translation.y = 600.0f;
 	}
+
 }
 
 void Scene::Draw()
@@ -100,7 +96,7 @@ Entity* Scene::GetEntityWithName(const Name& name)
 		}
 	}
 
-	return nullptr;
+	return entity;
 }
 
 std::vector<Entity*> Scene::GetEntitiesWithTag(const Name& tag)
@@ -113,4 +109,23 @@ std::vector<Entity*> Scene::GetEntitiesWithTag(const Name& tag)
 	}
 
 	return entities;
+}
+
+bool Scene::LoadEntities(const rapidjson::Value& value)
+{
+	for (rapidjson::SizeType i = 0; i < value.Size(); i++) {
+		const rapidjson::Value& entity_value = value[i];
+		if (entity_value.IsObject()) {
+			Entity* entity = new Entity(this);
+			if (entity->Load(entity_value)) {
+				Add(entity);
+			}
+			else {
+				delete entity;
+				return false;
+			}
+		}
+	}
+
+	return true;
 }

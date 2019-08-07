@@ -25,6 +25,9 @@
     <ClCompile Include="controller_component.cpp">
       <Filter>source\components</Filter>
     </ClCompile>
+    <ClCompile Include="physics_component.cpp">
+      <Filter>source\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine.h">
@@ -52,6 +55,12 @@
       <Filter>source\components</Filter>
     </ClInclude>
     <ClInclude Include="sprite_component.h">
+      <Filter>source\components</Filter>
+    </ClInclude>
+    <ClInclude Include="asteroid_component.h">
+      <Filter>source\components</Filter>
+    </ClInclude>
+    <ClInclude Include="physics_component.h">
       <Filter>source\components</Filter>
     </ClInclude>
   </ItemGroup>

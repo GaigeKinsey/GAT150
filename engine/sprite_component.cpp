@@ -19,7 +19,10 @@ void SpriteComponent::Destroy()
 
 bool SpriteComponent::Load(const rapidjson::Value& value)
 {
-	return false;
+	json::get_name(value, "texture_name", m_texture_name);
+	json::get_vector2(value, "origin", m_origin);
+
+	return true;
 }
 
 void SpriteComponent::Update()

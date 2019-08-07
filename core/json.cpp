@@ -165,3 +165,20 @@ bool json::get_color(const rapidjson::Value& value, const char* property_name, s
 
 	return true;
 }
+
+bool json::get_name(const rapidjson::Value& value, const char* property_name, Name& name)
+{
+	auto iter = value.FindMember(property_name);
+	if (iter == value.MemberEnd()) {
+		return false;
+	}
+
+	auto& property = iter->value;
+	if (property.IsString() == false) {
+		return false;
+	}
+
+	name = property.GetString();
+
+	return true;
+}

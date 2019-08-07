@@ -28,6 +28,10 @@ public:
 	std::vector<Entity*> GetEntitiesWithTag(const Name& tag);
 
 	Engine* GetEngine() { return m_engine; }
+	ComponentFactory* GetComponentFactory() { return m_component_factory; }
+
+protected:
+	bool LoadEntities(const rapidjson::Value& value);
 
 protected:
 	Engine* m_engine = nullptr;

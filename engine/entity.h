@@ -9,6 +9,7 @@ class Entity : public Object
 {
 public:
 	Entity() : m_scene(nullptr) {}
+	Entity(Scene* owner) : m_scene(owner) {}
 
 	bool Create(const Name& name, Scene* scene);
 	void Destroy() override;
@@ -39,6 +40,9 @@ public:
 	transform& GetTransform() { return m_transform; }
 
 	Scene* GetScene() { return m_scene; }
+
+protected:
+	bool LoadComponents(const rapidjson::Value& value);
 
 public:
 	transform m_transform;

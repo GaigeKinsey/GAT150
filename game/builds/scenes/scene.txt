@@ -1,0 +1,28 @@
+{
+	"entities": [
+	{
+		"name": "player",
+		"transform": {
+		"position": [400.0, 300.0],
+		"rotation": 0.0,
+		"scale": [0.5, 0.5]
+		},
+		"components": [
+			{
+			"type": "sprite_component",
+			"texture_name": "textures/playerShip1_blue.png",
+			"origin": [0.5, 0.5]
+			},
+			{
+			"type": "controller_component"
+			},
+			{
+			"type": "physics_component",
+			"max_velocity" : 10.0,
+			"drag" : 0.9,
+			"angular_drag" : 0.8
+			}
+		]
+	}
+	]
+}

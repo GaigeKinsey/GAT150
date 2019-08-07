@@ -22,6 +22,10 @@ bool Engine::Startup()
 	m_scene = new Scene();
 	m_scene->Create("scene", this);
 
+	rapidjson::Document document;
+	json::load("scenes/scene.txt", document);
+	m_scene->Load(document);
+
 	return true;
 }
 

@@ -8,12 +8,14 @@ class Component;
 class Entity : public Object
 {
 public:
-	Entity() : m_scene(nullptr) {}
-	Entity(Scene* owner) : m_scene(owner) {}
+	Entity() : m_scene(nullptr), m_spawner(false) {}
+	Entity(Scene* owner) : m_scene(owner), m_spawner(false) {}
+	Entity(const Entity& entity);
 
 	bool Create(const Name& name, Scene* scene);
 	void Destroy() override;
 	bool Load(const rapidjson::Value& value) override;
+	Entity* Clone() override { return new Entity(*this); }
 
 	void Update();
 	void Draw();
@@ -40,6 +42,9 @@ public:
 	transform& GetTransform() { return m_transform; }
 
 	Scene* GetScene() { return m_scene; }
+	void SetScene(Scene* scene) { m_scene = scene; }
+
+	bool IsSpawner() { return m_spawner; }
 
 protected:
 	bool LoadComponents(const rapidjson::Value& value);
@@ -49,7 +54,8 @@ public:
 
 protected:
 	Name m_tag;
-	Scene* m_scene = nullptr;
+	Scene* m_scene;
+	bool m_spawner;
 
 	std::vector<Component*> m_components;
 };

@@ -28,6 +28,9 @@
     <ClCompile Include="physics_component.cpp">
       <Filter>source\components</Filter>
     </ClCompile>
+    <ClCompile Include="asteroid_component.cpp">
+      <Filter>source\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine.h">

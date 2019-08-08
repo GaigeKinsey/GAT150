@@ -2,6 +2,7 @@
 	"entities": [
 	{
 		"name": "player",
+		"spawner": false,
 		"transform": {
 		"position": [400.0, 300.0],
 		"rotation": 0.0,
@@ -21,6 +22,34 @@
 			"max_velocity" : 10.0,
 			"drag" : 0.9,
 			"angular_drag" : 0.8
+			}
+		]
+	},
+	{
+		"name": "asteroid",
+		"type": "entity",
+		"spawner": true,
+		"transform": {
+		"position": [100.0, 200.0],
+		"rotation": 0.0,
+		"scale": [0.5, 0.5]
+		},
+		"components": [
+			{
+			"type": "sprite_component",
+			"texture_name": "textures/meteorGrey_big2.png",
+			"origin": [0.5, 0.5]
+			},
+			{
+			"type": "physics_component",
+			"max_velocity" : 10.0,
+			"drag" : 1.0,
+			"angular_drag" : 1.0
+			},
+			{
+			"type" : "asteroid_component",
+			"force_range" : [2.0, 5.0],
+			"torque_range" : [-100.0, 100.0]
 			}
 		]
 	}

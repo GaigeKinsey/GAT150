@@ -8,6 +8,7 @@ public:
 
 	void Destroy() override;
 	bool Load(const rapidjson::Value& value) override;
+	PhysicsComponent* Clone() override { return new PhysicsComponent(*this); }
 
 	void Update() override;
 

@@ -9,6 +9,7 @@ public:
 
 	virtual void Destroy() = 0;
 	virtual bool Load(const rapidjson::Value& value) = 0;
+	virtual Object* Clone() = 0;
 
 	const Name& GetName() { return m_name; }
 

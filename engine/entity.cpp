@@ -3,6 +3,18 @@
 #include "component.h"
 #include "render_component.h"
 
+Entity::Entity(const Entity& entity)
+{
+	m_name = entity.m_name;
+	m_scene = entity.m_scene;
+	m_spawner = entity.m_spawner;
+
+	for (Component* component : entity.m_components) {
+		Component* clone_component = dynamic_cast<Component*>(component->Clone());
+		m_components.push_back(clone_component);
+	}
+}
+
 bool Entity::Create(const Name& name, Scene* scene)
 {
 	m_name = name;
@@ -24,6 +36,7 @@ void Entity::Destroy()
 bool Entity::Load(const rapidjson::Value& value)
 {
 	json::get_name(value, "name", m_name);
+	json::get_bool(value, "spawner", m_spawner);
 
 	const rapidjson::Value& transform_value = value["transform"];
 	if (transform_value.IsObject()) {
@@ -81,7 +94,7 @@ bool Entity::LoadComponents(const rapidjson::Value& value)
 		if (component_value.IsObject()) {
 			Name type;
 			json::get_name(component_value, "type", type);
-			Component* component = m_scene->GetComponentFactory()->Create<>(type);
+			Component* component = m_scene->GetComponentFactory()->Create<Component>(type);
 			if (component && component->Load(component_value)) {
 				AddComponent(component);
 			}

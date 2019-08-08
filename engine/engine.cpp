@@ -1,7 +1,8 @@
 #include "engine.h"
+#include "scene.h"
+#include "entity.h"
 #include "..\\core\filesystem.h"
 #include "..\\core\name.h"
-#include "scene.h"
 
 bool Engine::Startup()
 {
@@ -25,6 +26,9 @@ bool Engine::Startup()
 	rapidjson::Document document;
 	json::load("scenes/scene.txt", document);
 	m_scene->Load(document);
+
+	Entity* entity = m_scene->GetComponentFactory()->Create<Entity>("asteroid");
+	m_scene->Add(entity);
 
 	return true;
 }

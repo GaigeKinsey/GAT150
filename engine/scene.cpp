@@ -3,16 +3,19 @@
 #include "sprite_component.h"
 #include "controller_component.h"
 #include "physics_component.h"
+#include "asteroid_component.h"
 
 bool Scene::Create(const Name& name, Engine* engine)
 {
 	m_name = name;
 	m_engine = engine;
 
-	m_component_factory = new ComponentFactory;
-	m_component_factory->Register("sprite_component", new Creator<SpriteComponent, Component>());
-	m_component_factory->Register("controller_component", new Creator<ControllerComponent, Component>());
-	m_component_factory->Register("physics_component", new Creator<PhysicsComponent, Component>());
+	m_object_factory = new ObjectFactory;
+	m_object_factory->Register("sprite_component", new Creator<SpriteComponent, Object>());
+	m_object_factory->Register("controller_component", new Creator<ControllerComponent, Object>());
+	m_object_factory->Register("physics_component", new Creator<PhysicsComponent, Object>());
+	m_object_factory->Register("asteroid_component", new Creator<AsteroidComponent, Object>());
+	m_object_factory->Register("entity", new Creator<Entity, Object>());
 
 	return true;
 }
@@ -26,7 +29,7 @@ void Scene::Destroy()
 
 	m_entities.clear();
 
-	delete m_component_factory;
+	delete m_object_factory;
 }
 
 bool Scene::Load(const rapidjson::Value& value)
@@ -116,9 +119,15 @@ bool Scene::LoadEntities(const rapidjson::Value& value)
 	for (rapidjson::SizeType i = 0; i < value.Size(); i++) {
 		const rapidjson::Value& entity_value = value[i];
 		if (entity_value.IsObject()) {
-			Entity* entity = new Entity(this);
+			Entity* entity = m_object_factory->Create<Entity>("entity");
+			entity->SetScene(this);
 			if (entity->Load(entity_value)) {
-				Add(entity);
+				if (entity->IsSpawner()) {
+					m_object_factory->Register(entity->GetName(), new Spawner<Object>(entity));
+				}
+				else {
+					Add(entity);
+				}
 			}
 			else {
 				delete entity;

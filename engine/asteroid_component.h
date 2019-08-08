@@ -4,10 +4,11 @@
 class AsteroidComponent : public Component
 {
 public:
-	AsteroidComponent() {}
+	AsteroidComponent() : m_torque(0.0f) {}
 
 	void Destroy() override;
 	bool Load(const rapidjson::Value& value) override;
+	AsteroidComponent* Clone() override { return new AsteroidComponent(*this); }
 
 	void Update() override;
 

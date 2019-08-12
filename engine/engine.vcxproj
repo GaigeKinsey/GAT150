@@ -156,21 +156,27 @@
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="physics_component.cpp" />
+    <ClCompile Include="player_component.cpp" />
     <ClCompile Include="scene.cpp" />
     <ClCompile Include="sprite_component.cpp" />
+    <ClCompile Include="weapon_component.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="asteroid_component.h" />
+    <ClInclude Include="circle_collision_component.h" />
+    <ClInclude Include="collision_component.h" />
     <ClInclude Include="component.h" />
     <ClInclude Include="controller_component.h" />
     <ClInclude Include="engine.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="object.h" />
     <ClInclude Include="physics_component.h" />
+    <ClInclude Include="player_component.h" />
     <ClInclude Include="render_component.h" />
     <ClInclude Include="scene.h" />
     <ClInclude Include="sprite_component.h" />
     <ClInclude Include="system.h" />
+    <ClInclude Include="weapon_component.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

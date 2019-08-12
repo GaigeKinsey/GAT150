@@ -26,7 +26,7 @@ void PhysicsComponent::AddForce(const vector2& force, bool relative)
 	vector2 new_force = (relative) ? vector2::rotate(force, m_owner->m_transform.rotation * math::DEG_TO_RAD) : force;
 	m_velocity = m_velocity + new_force;
 	if (m_velocity.length() > m_max_velocity) {
-		m_velocity = m_velocity.normalized() * m_max_velocity;
+		m_velocity = m_velocity.normalized() * m_max_velocity * g_timer.dt();
 	}
 }
 

@@ -51,6 +51,7 @@ protected:
 
 public:
 	transform m_transform;
+	bool m_destroy = false;
 
 protected:
 	Name m_tag;

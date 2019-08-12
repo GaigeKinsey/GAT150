@@ -8,10 +8,11 @@ Entity::Entity(const Entity& entity)
 	m_name = entity.m_name;
 	m_scene = entity.m_scene;
 	m_spawner = entity.m_spawner;
+	m_transform = entity.m_transform;
 
 	for (Component* component : entity.m_components) {
 		Component* clone_component = dynamic_cast<Component*>(component->Clone());
-		m_components.push_back(clone_component);
+		AddComponent(clone_component);
 	}
 }
 
@@ -94,7 +95,7 @@ bool Entity::LoadComponents(const rapidjson::Value& value)
 		if (component_value.IsObject()) {
 			Name type;
 			json::get_name(component_value, "type", type);
-			Component* component = m_scene->GetComponentFactory()->Create<Component>(type);
+			Component* component = m_scene->GetObjectFactory()->Create<Component>(type);
 			if (component && component->Load(component_value)) {
 				AddComponent(component);
 			}

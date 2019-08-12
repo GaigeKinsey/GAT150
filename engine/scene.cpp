@@ -4,6 +4,8 @@
 #include "controller_component.h"
 #include "physics_component.h"
 #include "asteroid_component.h"
+#include "weapon_component.h"
+#include "player_component.h"
 
 bool Scene::Create(const Name& name, Engine* engine)
 {
@@ -15,6 +17,8 @@ bool Scene::Create(const Name& name, Engine* engine)
 	m_object_factory->Register("controller_component", new Creator<ControllerComponent, Object>());
 	m_object_factory->Register("physics_component", new Creator<PhysicsComponent, Object>());
 	m_object_factory->Register("asteroid_component", new Creator<AsteroidComponent, Object>());
+	m_object_factory->Register("weapon_component", new Creator<WeaponComponent, Object>());
+	m_object_factory->Register("player_component", new Creator<PlayerComponent, Object>());
 	m_object_factory->Register("entity", new Creator<Entity, Object>());
 
 	return true;
@@ -53,6 +57,17 @@ void Scene::Update()
 		if (entity->m_transform.translation.y < 0.0f) entity->m_transform.translation.y = 600.0f;
 	}
 
+	auto iter = m_entities.begin();
+	while (iter != m_entities.end()) {
+		if ((*iter)->m_destroy) {
+			(*iter)->Destroy();
+			delete* iter;
+			iter = m_entities.erase(iter);
+		}
+		else {
+			iter++;
+		}
+	}
 }
 
 void Scene::Draw()

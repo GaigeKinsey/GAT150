@@ -28,7 +28,7 @@ public:
 	std::vector<Entity*> GetEntitiesWithTag(const Name& tag);
 
 	Engine* GetEngine() { return m_engine; }
-	ObjectFactory* GetComponentFactory() { return m_object_factory; }
+	ObjectFactory* GetObjectFactory() { return m_object_factory; }
 
 protected:
 	bool LoadEntities(const rapidjson::Value& value);

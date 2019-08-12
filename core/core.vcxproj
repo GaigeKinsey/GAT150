@@ -27,6 +27,7 @@
     <ClCompile Include="name.cpp" />
     <ClCompile Include="random.cpp" />
     <ClCompile Include="string.cpp" />
+    <ClCompile Include="timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="assert.h" />

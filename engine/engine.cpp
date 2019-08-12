@@ -4,6 +4,8 @@
 #include "..\\core\filesystem.h"
 #include "..\\core\name.h"
 
+#include <iostream>
+
 bool Engine::Startup()
 {
 	Name::AllocNames();
@@ -27,8 +29,12 @@ bool Engine::Startup()
 	json::load("scenes/scene.txt", document);
 	m_scene->Load(document);
 
-	Entity* entity = m_scene->GetComponentFactory()->Create<Entity>("asteroid");
-	m_scene->Add(entity);
+	for (size_t i = 0; i < 10; i++) {
+		Entity* entity = m_scene->GetObjectFactory()->Create<Entity>("asteroid");
+		entity->m_transform.translation = vector2(g_random(800.0f), g_random(600.0f));
+
+		m_scene->Add(entity);
+	}
 
 	return true;
 }
@@ -54,6 +60,8 @@ void Engine::Shutdown()
 
 void Engine::Update()
 {
+	g_timer.tick();
+
 	SDL_Event e;
 	if (SDL_PollEvent(&e)) {
 		if (e.type == SDL_QUIT) {
@@ -64,6 +72,11 @@ void Engine::Update()
 	const Uint8* keyboardState = SDL_GetKeyboardState(NULL);
 
 	if (keyboardState[SDL_SCANCODE_ESCAPE]) m_quit = true;
+
+	if (keyboardState[SDL_SCANCODE_SPACE]) {
+		std::cout << g_timer.fps() << std::endl;
+		std::cout << g_timer.dt() << std::endl;
+	}
 
 	for (System* system : m_systems) {
 		system->Update();

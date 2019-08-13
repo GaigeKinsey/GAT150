@@ -10,7 +10,10 @@ public:
 	bool Load(const rapidjson::Value& value) override;
 	AsteroidComponent* Clone() override { return new AsteroidComponent(*this); }
 
+	void Initialize() override;
 	void Update() override;
+
+	bool OnCollision(const Event<Entity>& event);
 
 protected:
 	bool m_initialized = false;

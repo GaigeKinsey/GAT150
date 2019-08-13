@@ -1,11 +1,14 @@
 #include "scene.h"
 #include "entity.h"
+
 #include "sprite_component.h"
+#include "sprite_animation_component.h"
 #include "controller_component.h"
 #include "physics_component.h"
 #include "asteroid_component.h"
 #include "weapon_component.h"
 #include "player_component.h"
+#include "circle_collision_component.h"
 
 bool Scene::Create(const Name& name, Engine* engine)
 {
@@ -14,11 +17,13 @@ bool Scene::Create(const Name& name, Engine* engine)
 
 	m_object_factory = new ObjectFactory;
 	m_object_factory->Register("sprite_component", new Creator<SpriteComponent, Object>());
+	m_object_factory->Register("sprite_animation_component", new Creator<SpriteAnimationComponent, Object>());
 	m_object_factory->Register("controller_component", new Creator<ControllerComponent, Object>());
 	m_object_factory->Register("physics_component", new Creator<PhysicsComponent, Object>());
 	m_object_factory->Register("asteroid_component", new Creator<AsteroidComponent, Object>());
 	m_object_factory->Register("weapon_component", new Creator<WeaponComponent, Object>());
 	m_object_factory->Register("player_component", new Creator<PlayerComponent, Object>());
+	m_object_factory->Register("circle_collision_component", new Creator<CircleCollisionComponent, Object>());
 	m_object_factory->Register("entity", new Creator<Entity, Object>());
 
 	return true;
@@ -68,6 +73,31 @@ void Scene::Update()
 			iter++;
 		}
 	}
+
+	std::vector<CollisionComponent*> collision_components;
+	for (Entity* entity : m_entities)
+	{
+		CollisionComponent* component = entity->GetComponent<CollisionComponent>();
+		if (component)
+		{
+			collision_components.push_back(component);
+		}
+	}
+
+	for (size_t i = 0; i < collision_components.size(); i++)
+	{
+		for (size_t j = i + 1; j < collision_components.size(); j++)
+		{
+			if (collision_components[i]->Intersects(collision_components[j])) {
+				Event<Entity> event;
+				event.name = "collision";
+				event.sender = collision_components[i]->GetOwner();
+				event.receiver = collision_components[j]->GetOwner();
+
+				m_engine->GetSystem<EntityEventDispatcher>()->Notify(event);
+			}
+		}
+	}
 }
 
 void Scene::Draw()
@@ -82,6 +112,7 @@ void Scene::Add(Entity* entity)
 	ASSERT(entity);
 	ASSERT(std::find(m_entities.begin(), m_entities.end(), entity) == m_entities.end());
 
+	entity->Initialize();
 	m_entities.push_back(entity);
 }
 

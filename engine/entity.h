@@ -17,6 +17,8 @@ public:
 	bool Load(const rapidjson::Value& value) override;
 	Entity* Clone() override { return new Entity(*this); }
 
+	void Initialize() override;
+
 	void Update();
 	void Draw();
 
@@ -36,8 +38,8 @@ public:
 		return component;
 	}
 
-	void SetTag(const Name& tag) { m_tag = tag; }
-	const Name& GetTag() const { return m_tag; }
+	void SetTag(Name& tag) { m_tag = tag; }
+	const Name& GetTag() { return m_tag; }
 
 	transform& GetTransform() { return m_transform; }
 

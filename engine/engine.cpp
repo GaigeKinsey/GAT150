@@ -1,6 +1,5 @@
 #include "engine.h"
 #include "scene.h"
-#include "entity.h"
 #include "..\\core\filesystem.h"
 #include "..\\core\name.h"
 
@@ -21,6 +20,10 @@ bool Engine::Startup()
 	m_systems.push_back(renderer);
 
 	m_texture_manager = new ResourceManager<Texture>(renderer);
+
+	EntityEventDispatcher* dispatcher = new EntityEventDispatcher(this);
+	dispatcher->Startup();
+	m_systems.push_back(dispatcher);
 
 	m_scene = new Scene();
 	m_scene->Create("scene", this);

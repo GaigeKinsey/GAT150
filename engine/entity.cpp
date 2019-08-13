@@ -6,6 +6,7 @@
 Entity::Entity(const Entity& entity)
 {
 	m_name = entity.m_name;
+	m_tag = entity.m_tag;
 	m_scene = entity.m_scene;
 	m_spawner = entity.m_spawner;
 	m_transform = entity.m_transform;
@@ -14,6 +15,8 @@ Entity::Entity(const Entity& entity)
 		Component* clone_component = dynamic_cast<Component*>(component->Clone());
 		AddComponent(clone_component);
 	}
+
+	Initialize();
 }
 
 bool Entity::Create(const Name& name, Scene* scene)
@@ -37,6 +40,7 @@ void Entity::Destroy()
 bool Entity::Load(const rapidjson::Value& value)
 {
 	json::get_name(value, "name", m_name);
+	json::get_name(value, "tag", m_tag);
 	json::get_bool(value, "spawner", m_spawner);
 
 	const rapidjson::Value& transform_value = value["transform"];
@@ -50,6 +54,13 @@ bool Entity::Load(const rapidjson::Value& value)
 	}
 
 	return true;
+}
+
+void Entity::Initialize()
+{
+	for (Component* component : m_components) {
+		component->Initialize();
+	}
 }
 
 void Entity::Update()

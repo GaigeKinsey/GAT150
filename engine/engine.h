@@ -4,8 +4,15 @@
 #include "..\\renderer\texture.h"
 #include "..\\audio\audiosystem.h"
 #include "..\\resources\resource_manager.h"
+#include "..\\framework\event_dispatcher.h"
 
+#include "entity.h"
 #include "system.h"
+
+class EntityEventDispatcher : public EventDispatcher<Event<Entity>> {
+public:
+	EntityEventDispatcher(Engine* engine) : EventDispatcher<Event<Entity>>(engine) {}
+};
 
 class Engine
 {

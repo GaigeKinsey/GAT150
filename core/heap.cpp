@@ -9,7 +9,7 @@
 
 heap::~heap() {
 	report();
-	ASSERT_MSG(m_allocations == 0, "memory leak.");
+	//ASSERT_MSG(m_allocations == 0, "memory leak.");
 }
 
 void* heap::allocate(size_t size)

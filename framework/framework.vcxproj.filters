@@ -16,6 +16,12 @@
     <ClInclude Include="manager.h">
       <Filter>source</Filter>
     </ClInclude>
+    <ClInclude Include="event.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="event_dispatcher.h">
+      <Filter>source</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="factory.cpp">

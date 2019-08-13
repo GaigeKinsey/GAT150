@@ -13,6 +13,7 @@ public:
 	bool Create(const Name& name);
 	void Destroy();
 
+	void Draw(SDL_Rect& rect, const vector2& position, float angle = 0.0f, const vector2 & scale = vector2::one, const vector2& origin = vector2::zero);
 	void Draw(const vector2& position, float angle = 0.0f, const vector2 & scale = vector2::one, const vector2& origin = vector2::zero);
 	vector2 GetSize() const;
 

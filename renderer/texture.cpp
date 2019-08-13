@@ -22,6 +22,25 @@ void Texture::Destroy()
 	}
 }
 
+void Texture::Draw(SDL_Rect& rect, const vector2& position, float angle, const vector2& scale, const vector2& origin)
+{
+	vector2 size = GetSize();
+	size = size * scale;
+
+	vector2 screen_position = position - (size * origin);
+
+	SDL_Rect dest;
+	dest.x = static_cast<int>(screen_position.x);
+	dest.y = static_cast<int>(screen_position.y);
+	dest.w = static_cast<int>(size.x);
+	dest.h = static_cast<int>(size.y);
+
+	vector2 rotation_point = size * origin;
+	SDL_Point point = { static_cast<int>(rotation_point.x), static_cast<int>(rotation_point.y) };
+
+	SDL_RenderCopyEx(m_renderer->GetSDLRenderer(), m_texture, &rect, &dest, angle, &point, SDL_FLIP_NONE);
+}
+
 void Texture::Draw(const vector2& position, float angle, const vector2 & scale, const vector2 & origin)
 {
 	vector2 size = GetSize();

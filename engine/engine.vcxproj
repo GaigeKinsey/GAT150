@@ -152,12 +152,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="asteroid_component.cpp" />
+    <ClCompile Include="circle_collision_component.cpp" />
     <ClCompile Include="controller_component.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="physics_component.cpp" />
     <ClCompile Include="player_component.cpp" />
     <ClCompile Include="scene.cpp" />
+    <ClCompile Include="sprite_animation_component.cpp" />
     <ClCompile Include="sprite_component.cpp" />
     <ClCompile Include="weapon_component.cpp" />
   </ItemGroup>
@@ -174,6 +176,7 @@
     <ClInclude Include="player_component.h" />
     <ClInclude Include="render_component.h" />
     <ClInclude Include="scene.h" />
+    <ClInclude Include="sprite_animation_component.h" />
     <ClInclude Include="sprite_component.h" />
     <ClInclude Include="system.h" />
     <ClInclude Include="weapon_component.h" />

@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="event.h" />
+    <ClInclude Include="event_dispatcher.h" />
     <ClInclude Include="factory.h" />
     <ClInclude Include="manager.h" />
     <ClInclude Include="singleton.h" />

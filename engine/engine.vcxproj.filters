@@ -37,6 +37,12 @@
     <ClCompile Include="player_component.cpp">
       <Filter>source\components</Filter>
     </ClCompile>
+    <ClCompile Include="circle_collision_component.cpp">
+      <Filter>source\components</Filter>
+    </ClCompile>
+    <ClCompile Include="sprite_animation_component.cpp">
+      <Filter>source\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine.h">
@@ -82,6 +88,9 @@
       <Filter>source\components</Filter>
     </ClInclude>
     <ClInclude Include="weapon_component.h">
+      <Filter>source\components</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite_animation_component.h">
       <Filter>source\components</Filter>
     </ClInclude>
   </ItemGroup>

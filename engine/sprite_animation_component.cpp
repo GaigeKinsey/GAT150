@@ -43,7 +43,7 @@ void SpriteAnimationComponent::Update()
 		m_frame++;
 	}
 
-	Texture* texture = m_owner->GetScene()->GetEngine()->GetTextureManager()->Get(m_texture_name);
+	Texture* texture = m_owner->GetScene()->GetEngine()->GetResourceManager()->Get<Texture>(m_texture_name);
 	vector2 texture_size = texture->GetSize();
 	vector2 frame_num(m_frames_col, m_frames_row);
 
@@ -58,6 +58,6 @@ void SpriteAnimationComponent::Update()
 
 void SpriteAnimationComponent::Draw()
 {
-	Texture* texture = m_owner->GetScene()->GetEngine()->GetTextureManager()->Get(m_texture_name);
+	Texture* texture = m_owner->GetScene()->GetEngine()->GetResourceManager()->Get<Texture>(m_texture_name);
 	texture->Draw(m_rect, m_owner->m_transform.translation, m_owner->m_transform.rotation * math::RAD_TO_DEG, m_owner->m_transform.scale, m_origin);
 }

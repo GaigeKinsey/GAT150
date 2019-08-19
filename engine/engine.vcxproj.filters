@@ -43,6 +43,9 @@
     <ClCompile Include="sprite_animation_component.cpp">
       <Filter>source\components</Filter>
     </ClCompile>
+    <ClCompile Include="text_component.cpp">
+      <Filter>source\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine.h">
@@ -91,6 +94,9 @@
       <Filter>source\components</Filter>
     </ClInclude>
     <ClInclude Include="sprite_animation_component.h">
+      <Filter>source\components</Filter>
+    </ClInclude>
+    <ClInclude Include="text_component.h">
       <Filter>source\components</Filter>
     </ClInclude>
   </ItemGroup>

@@ -5,7 +5,7 @@
 class SpriteAnimationComponent : public RenderComponent
 {
 public:
-	SpriteAnimationComponent() {}
+	SpriteAnimationComponent() : m_frame(0), m_frame_rate(0.0f), m_frame_timer(0.0f), m_frames_col(0), m_frames_row(0), m_num_frames(0), m_rect(SDL_Rect()) {}
 
 	void Initialize() override;
 	bool Create(const Name& name, Entity* owner, const Name& texture_name, const vector2& origin = vector2::zero);

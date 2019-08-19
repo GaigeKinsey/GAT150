@@ -15,8 +15,6 @@ Entity::Entity(const Entity& entity)
 		Component* clone_component = dynamic_cast<Component*>(component->Clone());
 		AddComponent(clone_component);
 	}
-
-	Initialize();
 }
 
 bool Entity::Create(const Name& name, Scene* scene)

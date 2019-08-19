@@ -3,6 +3,7 @@
 #include "..\\engine\system.h"
 #include "..\\external\SDL2-2.0.10\include\SDL.h"
 #include "..\\external\SDL2-2.0.10\include\SDL_image.h"
+#include "..\\external\SDL2-2.0.10\include\SDL_ttf.h"
 #include <string>
 
 class Renderer : public System

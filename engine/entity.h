@@ -1,12 +1,21 @@
 #pragma once
 #include "object.h"
 #include "..\\math\transform.h"
+#include "..\\core\core.h"
 
 class Scene;
 class Component;
 
 class Entity : public Object
 {
+public:
+	enum eState : u8 {
+		ACTIVE,
+		VISIBLE,
+		DESTROY,
+		TRANSIENT
+	};
+
 public:
 	Entity() : m_scene(nullptr), m_spawner(false) {}
 	Entity(Scene* owner) : m_scene(owner), m_spawner(false) {}
@@ -53,7 +62,7 @@ protected:
 
 public:
 	transform m_transform;
-	bool m_destroy = false;
+	std::bitset<8> m_state = BIT(ACTIVE) | BIT(VISIBLE);
 
 protected:
 	Name m_tag;

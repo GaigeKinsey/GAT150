@@ -27,7 +27,7 @@ void WeaponComponent::Update()
 {
 	m_lifetime -= g_timer.dt();
 	if (m_lifetime <= 0.0f) {
-		m_owner->m_destroy = true;
+		m_owner->m_state.set(Entity::eState::DESTROY);
 	}
 
 	if (!m_initialized) {
@@ -46,7 +46,7 @@ void WeaponComponent::Update()
 bool WeaponComponent::OnCollision(const Event<Entity>& event)
 {
 	if ((m_owner == event.sender && event.receiver->GetName() == "asteroid") || (m_owner == event.receiver && event.sender->GetName() == "asteroid")) {
-		m_owner->m_destroy = true;
+		m_owner->m_state.set(Entity::eState::DESTROY);
 	}
 
 	return true;

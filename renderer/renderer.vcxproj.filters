@@ -16,6 +16,12 @@
     <ClInclude Include="texture.h">
       <Filter>source</Filter>
     </ClInclude>
+    <ClInclude Include="font.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="text.h">
+      <Filter>source</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="color.cpp">
@@ -25,6 +31,12 @@
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="texture.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="font.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="text.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>

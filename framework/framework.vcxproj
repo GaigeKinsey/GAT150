@@ -24,6 +24,7 @@
     <ClInclude Include="factory.h" />
     <ClInclude Include="manager.h" />
     <ClInclude Include="singleton.h" />
+    <ClInclude Include="variant.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="factory.cpp" />

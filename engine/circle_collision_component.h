@@ -4,7 +4,7 @@
 class CircleCollisionComponent : public CollisionComponent
 {
 public:
-	CircleCollisionComponent() : CollisionComponent() {}
+	CircleCollisionComponent() : m_radius(0.0f), CollisionComponent() {}
 
 	void Create(const Name& name, Entity* owner, float radius);
 	void Destroy() override;

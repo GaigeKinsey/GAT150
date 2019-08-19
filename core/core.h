@@ -8,3 +8,7 @@
 #include "random.h"
 #include "filesystem.h"
 #include "json.h"
+
+#include <bitset>
+
+#define BIT(bit) (1 << bit)

@@ -13,6 +13,7 @@ class Scene : public Object
 public:
 	Scene() : m_engine(nullptr), m_object_factory(nullptr) {}
 
+	void Initialize() override;
 	bool Create(const Name& name, Engine* engine);
 	void Destroy() override;
 	bool Load(const rapidjson::Value& value) override;
@@ -37,4 +38,5 @@ protected:
 	Engine* m_engine = nullptr;
 	ObjectFactory* m_object_factory = nullptr;
 	std::list<Entity*> m_entities;
+	class Text* m_text;
 };

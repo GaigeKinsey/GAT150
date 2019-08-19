@@ -22,6 +22,9 @@
     <ClInclude Include="event_dispatcher.h">
       <Filter>source</Filter>
     </ClInclude>
+    <ClInclude Include="variant.h">
+      <Filter>source</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="factory.cpp">

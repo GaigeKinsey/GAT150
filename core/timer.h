@@ -39,18 +39,18 @@ public:
 		if (m_frame_count == 100.0f) {
 			duration = std::chrono::duration_cast<clock_duration>(clock::now() - m_start_frame_time);
 			m_start_frame_time = clock::now();
-			float elapsed = duration.count() / static_cast<double>(std::chrono::high_resolution_clock::period::den);
+			double elapsed = duration.count() / static_cast<double>(std::chrono::high_resolution_clock::period::den);
 			m_fps = m_frame_count / elapsed;
 			m_frame_count = 0;
 		}
 	}
 
-	float dt() const { return m_dt; }
-	float fps() const { return m_fps; }
+	double dt() const { return m_dt; }
+	double fps() const { return m_fps; }
 
 private:
-	float m_dt;
-	float m_fps;
+	double m_dt;
+	double m_fps;
 	size_t m_frame_count;
 	clock::time_point m_prev_frame_time;
 	clock::time_point m_start_frame_time;

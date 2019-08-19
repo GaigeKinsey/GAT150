@@ -20,12 +20,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="color.h" />
+    <ClInclude Include="font.h" />
     <ClInclude Include="renderer.h" />
+    <ClInclude Include="text.h" />
     <ClInclude Include="texture.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="color.cpp" />
+    <ClCompile Include="font.cpp" />
     <ClCompile Include="renderer.cpp" />
+    <ClCompile Include="text.cpp" />
     <ClCompile Include="texture.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

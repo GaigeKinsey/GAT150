@@ -39,7 +39,7 @@ public:
 		return system;
 	}
 
-	ResourceManager<Texture>* GetTextureManager() { return m_texture_manager; }
+	ResourceManager<Resource>* GetResourceManager() { return m_resource_manager; }
 
 private:
 	bool m_quit = false;
@@ -47,5 +47,5 @@ private:
 
 	std::vector<System*> m_systems;
 
-	ResourceManager<Texture>* m_texture_manager = nullptr;
+	ResourceManager<Resource>* m_resource_manager = nullptr;
 };

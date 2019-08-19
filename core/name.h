@@ -7,7 +7,7 @@ class Name
 {
 public:
 	Name() : m_id(0), m_index(0) {};
-	Name(const char* string);
+	Name(const char* string, bool unique = false);
 
 	bool operator == (const Name& other) const;
 	bool operator != (const Name& other) const;
@@ -28,6 +28,7 @@ private:
 	static const size_t MAX_ENTRIES = 65536;
 	static const size_t MAX_NAME_SIZE = 64;
 	
+	static size_t ms_unique_id;
 	static char* ms_names;
 };
 

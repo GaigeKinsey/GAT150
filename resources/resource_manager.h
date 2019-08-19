@@ -2,14 +2,17 @@
 
 #include "..\\framework\manager.h"
 
-template <typename T, size_t N = 65536>
-class ResourceManager : public Manager<T, N>
+template <typename TBase, size_t N = 65536>
+class ResourceManager : public Manager<TBase, N>
 {
 public:
 	ResourceManager(Renderer* renderer) : m_renderer(renderer) {}
 	~ResourceManager();
 
-	T* Get(const Name& name) override;
+	template<typename T = TBase>
+	T* Get(const Name& name);
+
+	void Add(const Name& name, TBase* resource);
 	void Remove(const Name& name) override;
 	void RemoveAll() override;
 
@@ -17,52 +20,63 @@ private:
 	Renderer* m_renderer;
 };
 
-template<typename T, size_t N>
-inline ResourceManager<T, N>::~ResourceManager()
+template<typename TBase, size_t N>
+inline ResourceManager<TBase, N>::~ResourceManager()
 {
 	RemoveAll();
 }
 
-template<typename T, size_t N>
-T* ResourceManager<T, N>::Get(const Name& name)
+template<typename TBase, size_t N>
+template<typename T>
+T* ResourceManager<TBase, N>::Get(const Name& name)
 {
 	u32 index = name.GetID() % N;
-	T* element = Manager<T, N>::m_elements[index];
+	TBase* element = Manager<TBase, N>::m_elements[index];
 
 	if (element == nullptr)
 	{
 		element = new T(m_renderer);
 		element->Create(name);
-		Manager<T, N>::m_elements[index] = element;
+		Manager<TBase, N>::m_elements[index] = element;
 	}
 
-	return element;
+	return dynamic_cast<T*>(element);
 }
 
-template<typename T, size_t N>
-void ResourceManager<T, N>::Remove(const Name& name)
+template<typename TBase, size_t N>
+inline void ResourceManager<TBase, N>::Add(const Name& name, TBase* resource)
 {
 	u32 index = name.GetID() % N;
-	T* element = Manager<T, N>::m_elements[index];
+	TBase* element = Manager<TBase, N>::m_elements[index];
+	ASSERT(element == nullptr);
+
+	Manager<TBase, N>::m_elements[index] = resource;
+}
+
+template<typename TBase, size_t N>
+void ResourceManager<TBase, N>::Remove(const Name& name)
+{
+	u32 index = name.GetID() % N;
+	TBase* element = Manager<TBase, N>::m_elements[index];
 	if (element)
 	{
 		element->Destroy();
 		delete element;
-		Manager<T, N>::m_elements[index] = nullptr;
+		Manager<TBase, N>::m_elements[index] = nullptr;
 	}
 }
 
-template<typename T, size_t N>
-void ResourceManager<T, N>::RemoveAll()
+template<typename TBase, size_t N>
+void ResourceManager<TBase, N>::RemoveAll()
 {
 	for (size_t i = 0; i < N; i++)
 	{
-		T* element = Manager<T, N>::m_elements[i];
+		TBase* element = Manager<TBase, N>::m_elements[i];
 		if (element)
 		{
 			element->Destroy();
 			delete element;
-			Manager<T, N>::m_elements[i] = nullptr;
+			Manager<TBase, N>::m_elements[i] = nullptr;
 		}
 	}
 }

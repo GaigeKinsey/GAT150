@@ -161,6 +161,7 @@
     <ClCompile Include="scene.cpp" />
     <ClCompile Include="sprite_animation_component.cpp" />
     <ClCompile Include="sprite_component.cpp" />
+    <ClCompile Include="text_component.cpp" />
     <ClCompile Include="weapon_component.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +180,7 @@
     <ClInclude Include="sprite_animation_component.h" />
     <ClInclude Include="sprite_component.h" />
     <ClInclude Include="system.h" />
+    <ClInclude Include="text_component.h" />
     <ClInclude Include="weapon_component.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

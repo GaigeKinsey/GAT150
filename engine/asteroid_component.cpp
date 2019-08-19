@@ -41,12 +41,23 @@ void AsteroidComponent::Update()
 bool AsteroidComponent::OnCollision(const Event<Entity>& event)
 {
 	if ((m_owner == event.sender && event.receiver->GetTag() == "player_weapon") || (m_owner == event.receiver && event.sender->GetTag() == "player_weapon")) {
-		m_owner->m_destroy = true;
+		m_owner->m_state.set(Entity::eState::DESTROY);
+
+		Event<Entity> _event;
+		_event.name = "score";
+		_event.data[0].type = Variant::eType::INT;
+		_event.data[0].as_int = 100;
+		m_owner->GetScene()->GetEngine()->GetSystem<EntityEventDispatcher>()->Notify(_event);
+
+
+		Entity* entity = m_owner->GetScene()->GetObjectFactory()->Create<Entity>("score");
+		entity->m_transform.translation = m_owner->m_transform.translation;
+		m_owner->GetScene()->Add(entity);
 
 		m_owner->GetScene()->GetEngine()->GetSystem<AudioSystem>()->AddSound("explosion", "audio/explosion.wav");
 		m_owner->GetScene()->GetEngine()->GetSystem<AudioSystem>()->PlaySounds("explosion");
 
-		Entity* entity = m_owner->GetScene()->GetObjectFactory()->Create<Entity>("explosion");
+		entity = m_owner->GetScene()->GetObjectFactory()->Create<Entity>("explosion");
 		entity->m_transform.translation = m_owner->m_transform.translation;
 
 		m_owner->GetScene()->Add(entity);

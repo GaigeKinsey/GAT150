@@ -9,6 +9,18 @@
 #include "weapon_component.h"
 #include "player_component.h"
 #include "circle_collision_component.h"
+#include "text_component.h"
+#include "..\\renderer\text.h"
+
+void Scene::Initialize()
+{
+	for (size_t i = 0; i < 10; i++) {
+		Entity* entity = m_object_factory->Create<Entity>("asteroid");
+		entity->m_transform.translation = vector2(g_random(800.0f), g_random(600.0f));
+
+		Add(entity);
+	}
+}
 
 bool Scene::Create(const Name& name, Engine* engine)
 {
@@ -24,7 +36,12 @@ bool Scene::Create(const Name& name, Engine* engine)
 	m_object_factory->Register("weapon_component", new Creator<WeaponComponent, Object>());
 	m_object_factory->Register("player_component", new Creator<PlayerComponent, Object>());
 	m_object_factory->Register("circle_collision_component", new Creator<CircleCollisionComponent, Object>());
+	m_object_factory->Register("text_component", new Creator<TextComponent, Object>());
 	m_object_factory->Register("entity", new Creator<Entity, Object>());
+
+	m_text = m_engine->GetResourceManager()->Get<Text>("fonts/robotomonoregular.ttf");
+	m_text->SetColor(color::white);
+	m_text->SetText("Hello World!");
 
 	return true;
 }
@@ -54,7 +71,9 @@ bool Scene::Load(const rapidjson::Value& value)
 void Scene::Update()
 {
 	for (Entity* entity : m_entities) {
-		entity->Update();
+		if (entity->m_state.test(Entity::eState::ACTIVE)) {
+			entity->Update();
+		}
 
 		if (entity->m_transform.translation.x < 0.0f) entity->m_transform.translation.x = 800.0f;
 		if (entity->m_transform.translation.x > 800.0f) entity->m_transform.translation.x = 0.0f;
@@ -64,7 +83,7 @@ void Scene::Update()
 
 	auto iter = m_entities.begin();
 	while (iter != m_entities.end()) {
-		if ((*iter)->m_destroy) {
+		if ((*iter)->m_state.test(Entity::eState::DESTROY)) {
 			(*iter)->Destroy();
 			delete* iter;
 			iter = m_entities.erase(iter);
@@ -88,6 +107,12 @@ void Scene::Update()
 	{
 		for (size_t j = i + 1; j < collision_components.size(); j++)
 		{
+			if (collision_components[i]->GetOwner()->m_state.test(Entity::eState::DESTROY) ||
+				collision_components[j]->GetOwner()->m_state.test(Entity::eState::DESTROY))
+			{
+				continue;
+			}
+
 			if (collision_components[i]->Intersects(collision_components[j])) {
 				Event<Entity> event;
 				event.name = "collision";
@@ -103,8 +128,12 @@ void Scene::Update()
 void Scene::Draw()
 {
 	for (Entity* entity : m_entities) {
-		entity->Draw();
+		if (entity->m_state.test(Entity::eState::VISIBLE)) {
+			entity->Draw();
+		}
 	}
+
+	m_text->Draw(vector2(300.0f, 300.0f));
 }
 
 void Scene::Add(Entity* entity)

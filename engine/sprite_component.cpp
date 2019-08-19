@@ -31,6 +31,6 @@ void SpriteComponent::Update()
 
 void SpriteComponent::Draw()
 {
-	Texture* texture = m_owner->GetScene()->GetEngine()->GetTextureManager()->Get(m_texture_name);
+	Texture* texture = m_owner->GetScene()->GetEngine()->GetResourceManager()->Get<Texture>(m_texture_name);
 	texture->Draw(m_owner->m_transform.translation, m_owner->m_transform.rotation * math::RAD_TO_DEG, m_owner->m_transform.scale, m_origin);
 }

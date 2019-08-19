@@ -11,7 +11,7 @@ public:
 	};
 
 public:
-	PhysicsComponent() : m_max_velocity(0.0f), m_drag(0.0f), m_angular_drag(0.0f) {}
+	PhysicsComponent() : m_max_velocity(0.0f), m_max_angular_velocity(0.0f), m_drag(0.0f), m_angular_drag(0.0f), m_force_type(eForceType::FORCE) {}
 
 	void Destroy() override;
 	bool Load(const rapidjson::Value& value) override;

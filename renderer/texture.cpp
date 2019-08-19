@@ -14,6 +14,21 @@ bool Texture::Create(const Name& name)
 	return true;
 }
 
+bool Texture::CreateFromFont(Font* font, const char* string, const color& font_color)
+{
+	SDL_Color c;
+	c.r = static_cast<Uint8>(font_color.r * 255.0f);
+	c.g = static_cast<Uint8>(font_color.g * 255.0f);
+	c.b = static_cast<Uint8>(font_color.b * 255.0f);
+
+	SDL_Surface* surface = TTF_RenderText_Solid(font->m_font, string, c);
+	ASSERT(surface);
+	m_texture = SDL_CreateTextureFromSurface(m_renderer->GetSDLRenderer(), surface);
+	SDL_FreeSurface(surface);
+
+	return m_texture != nullptr;
+}
+
 void Texture::Destroy()
 {
 	if (m_texture) {

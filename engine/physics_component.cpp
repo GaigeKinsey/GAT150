@@ -27,7 +27,7 @@ void PhysicsComponent::Update()
 	}
 
 	m_angular_velocity += m_torque * g_timer.dt();
-	m_angular_velocity = min(m_angular_velocity, m_max_angular_velocity);
+	m_angular_velocity = math::clamp(m_angular_velocity, -m_max_angular_velocity, m_max_angular_velocity);
 
 	m_owner->m_transform.rotation += m_angular_velocity * g_timer.dt();
 	m_angular_velocity *= pow(m_angular_drag, g_timer.dt());

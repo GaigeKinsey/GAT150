@@ -2,18 +2,30 @@
 #include "assert.h"
 #include "string.h"
 
+size_t Name::ms_unique_id = 0;
 char* Name::ms_names = nullptr;
 
-Name::Name(const char* string)
+Name::Name(const char* string, bool unique)
 {
 	ASSERT_MSG(strlen(string) < MAX_NAME_SIZE, "name size is greater than max name size.");
 
 	char lower_string[MAX_NAME_SIZE];
 	string_to_lower(string, lower_string, MAX_NAME_SIZE);
 
-	m_id = static_cast<u32>(std::hash<std::string>{}(lower_string));
-	m_index = m_id % MAX_ENTRIES;
-	strcpy_s(ms_names + (m_index * MAX_NAME_SIZE), MAX_NAME_SIZE, string);
+	if (unique) {
+		std::string unique_string(lower_string);
+		unique_string += std::to_string(ms_unique_id);
+		ms_unique_id++;
+
+		m_id = static_cast<u32>(std::hash<std::string>{}(unique_string.c_str()));
+		m_index = m_id % MAX_ENTRIES;
+		strcpy_s(ms_names + (m_index * MAX_NAME_SIZE), MAX_NAME_SIZE, string);
+	}
+	else {
+		m_id = static_cast<u32>(std::hash<std::string>{}(lower_string));
+		m_index = m_id % MAX_ENTRIES;
+		strcpy_s(ms_names + (m_index * MAX_NAME_SIZE), MAX_NAME_SIZE, string);
+	}
 }
 
 bool Name::operator==(const Name& other) const

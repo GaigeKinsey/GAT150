@@ -19,7 +19,7 @@ bool Engine::Startup()
 	renderer->Create("game", 800, 600);
 	m_systems.push_back(renderer);
 
-	m_texture_manager = new ResourceManager<Texture>(renderer);
+	m_resource_manager = new ResourceManager<Resource>(renderer);
 
 	EntityEventDispatcher* dispatcher = new EntityEventDispatcher(this);
 	dispatcher->Startup();
@@ -31,27 +31,22 @@ bool Engine::Startup()
 	rapidjson::Document document;
 	json::load("scenes/scene.txt", document);
 	m_scene->Load(document);
-
-	for (size_t i = 0; i < 10; i++) {
-		Entity* entity = m_scene->GetObjectFactory()->Create<Entity>("asteroid");
-		entity->m_transform.translation = vector2(g_random(800.0f), g_random(600.0f));
-
-		m_scene->Add(entity);
-	}
+	m_scene->Initialize();
 
 	return true;
 }
 
 void Engine::Shutdown()
 {
+	m_resource_manager->RemoveAll();
+	delete m_resource_manager;
+
 	for (System* system : m_systems) {
 		system->Shutdown();
 		delete system;
 	}
 	m_systems.clear();
 
-	m_texture_manager->RemoveAll();
-	delete m_texture_manager;
 
 	m_scene->Destroy();
 	delete m_scene;
@@ -75,11 +70,6 @@ void Engine::Update()
 	const Uint8* keyboardState = SDL_GetKeyboardState(NULL);
 
 	if (keyboardState[SDL_SCANCODE_ESCAPE]) m_quit = true;
-
-	if (keyboardState[SDL_SCANCODE_SPACE]) {
-		std::cout << g_timer.fps() << std::endl;
-		std::cout << g_timer.dt() << std::endl;
-	}
 
 	for (System* system : m_systems) {
 		system->Update();

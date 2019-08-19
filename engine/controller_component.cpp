@@ -33,6 +33,6 @@ void ControllerComponent::Update()
 
 	if (keyboardState[SDL_SCANCODE_SPACE]) {
 		PlayerComponent* player_component = m_owner->GetComponent<PlayerComponent>();
-		player_component->Event("fire_weapon");
+		player_component->FireEvent("fire_weapon");
 	}
 }

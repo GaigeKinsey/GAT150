@@ -9,7 +9,6 @@ public:
 	Manager() {}
 	virtual ~Manager() {}
 
-	virtual T* Get(const Name& name) = 0;
 	virtual void Remove(const Name& name) = 0;
 	virtual void RemoveAll() = 0;
 

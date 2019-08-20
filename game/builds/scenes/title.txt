@@ -1,0 +1,25 @@
+{
+	"entities": [
+	{
+		"name": "title",
+		"type": "entity",
+		"tag": "ui",
+		"spawner": false,
+		"transform": {
+		"position": [600.0, 200.0],
+		"rotation": 0.0,
+		"scale": [0.6, 0.6]
+		},
+		"components": [
+			{
+			"type": "text_component",
+			"font_name": "fonts/emulogic.ttf",
+			"texture_name_base": "text_texture",
+			"color": [1.0, 0.0, 0.0],
+			"text": "SHOOTY BANG BANG",
+			"origin": [0.5, 0.5]
+			}
+		]
+	}
+	]
+}

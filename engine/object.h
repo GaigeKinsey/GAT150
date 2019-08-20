@@ -7,6 +7,7 @@ class Object
 {
 public:
 	Object() {}
+	virtual ~Object() {}
 
 	virtual void Destroy() = 0;
 	virtual bool Load(const rapidjson::Value& value) = 0;

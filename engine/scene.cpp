@@ -14,12 +14,6 @@
 
 void Scene::Initialize()
 {
-	for (size_t i = 0; i < 10; i++) {
-		Entity* entity = m_object_factory->Create<Entity>("asteroid");
-		entity->m_transform.translation = vector2(g_random(800.0f), g_random(600.0f));
-
-		Add(entity);
-	}
 }
 
 bool Scene::Create(const Name& name, Engine* engine)
@@ -39,9 +33,9 @@ bool Scene::Create(const Name& name, Engine* engine)
 	m_object_factory->Register("text_component", new Creator<TextComponent, Object>());
 	m_object_factory->Register("entity", new Creator<Entity, Object>());
 
-	m_text = m_engine->GetResourceManager()->Get<Text>("fonts/robotomonoregular.ttf");
-	m_text->SetColor(color::white);
-	m_text->SetText("Hello World!");
+	//m_text = m_engine->GetResourceManager()->Get<Text>("fonts/robotomonoregular.ttf");
+	//m_text->SetColor(color::white);
+	//m_text->SetText("Hello World!");
 
 	return true;
 }
@@ -133,7 +127,7 @@ void Scene::Draw()
 		}
 	}
 
-	m_text->Draw(vector2(300.0f, 300.0f));
+	//m_text->Draw(vector2(300.0f, 300.0f));
 }
 
 void Scene::Add(Entity* entity)

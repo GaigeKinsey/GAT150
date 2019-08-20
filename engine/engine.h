@@ -3,6 +3,7 @@
 #include "..\\renderer\renderer.h"
 #include "..\\renderer\texture.h"
 #include "..\\audio\audiosystem.h"
+#include "..\\input\input_system.h"
 #include "..\\resources\resource_manager.h"
 #include "..\\framework\event_dispatcher.h"
 
@@ -23,6 +24,10 @@ public:
 	bool Startup();
 	void Shutdown();
 	void Update();
+
+	bool LoadScene(const char* scene_name);
+	void DestroyScene();
+	Scene* GetScene() { return m_scene; }
 
 	bool Quit() const { return m_quit; }
 	

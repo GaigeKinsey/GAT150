@@ -7,6 +7,7 @@
 #include "timer.h"
 #include "random.h"
 #include "filesystem.h"
+#include "handle.h"
 #include "json.h"
 
 #include <bitset>

@@ -13,7 +13,7 @@ public:
 
 	void Update() override;
 
-	bool Intersects(CollisionComponent* other);
+	bool Intersects(CollisionComponent* other);	
 
 protected:
 	float m_radius;

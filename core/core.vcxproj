@@ -33,6 +33,7 @@
     <ClInclude Include="assert.h" />
     <ClInclude Include="core.h" />
     <ClInclude Include="filesystem.h" />
+    <ClInclude Include="handle.h" />
     <ClInclude Include="heap.h" />
     <ClInclude Include="json.h" />
     <ClInclude Include="memory.h" />

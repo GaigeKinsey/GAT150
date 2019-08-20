@@ -19,26 +19,23 @@ bool Engine::Startup()
 	renderer->Create("game", 800, 600);
 	m_systems.push_back(renderer);
 
+	InputSystem* input = new InputSystem(this);
+	input->Startup();
+	m_systems.push_back(input);
+
 	m_resource_manager = new ResourceManager<Resource>(renderer);
 
 	EntityEventDispatcher* dispatcher = new EntityEventDispatcher(this);
 	dispatcher->Startup();
 	m_systems.push_back(dispatcher);
 
-	m_scene = new Scene();
-	m_scene->Create("scene", this);
-
-	rapidjson::Document document;
-	json::load("scenes/scene.txt", document);
-	m_scene->Load(document);
-	m_scene->Initialize();
-
 	return true;
 }
 
 void Engine::Shutdown()
 {
-	m_resource_manager->RemoveAll();
+	DestroyScene();
+
 	delete m_resource_manager;
 
 	for (System* system : m_systems) {
@@ -47,10 +44,6 @@ void Engine::Shutdown()
 	}
 	m_systems.clear();
 
-
-	m_scene->Destroy();
-	delete m_scene;
-
 	Name::FreeNames();
 
 	SDL_Quit();
@@ -58,8 +51,6 @@ void Engine::Shutdown()
 
 void Engine::Update()
 {
-	g_timer.tick();
-
 	SDL_Event e;
 	if (SDL_PollEvent(&e)) {
 		if (e.type == SDL_QUIT) {
@@ -67,16 +58,38 @@ void Engine::Update()
 		}
 	}
 
-	const Uint8* keyboardState = SDL_GetKeyboardState(NULL);
-
-	if (keyboardState[SDL_SCANCODE_ESCAPE]) m_quit = true;
-
+	g_timer.tick();
 	for (System* system : m_systems) {
 		system->Update();
 	}
-	m_scene->Update();
+
+	if (GetSystem<InputSystem>()->GetKey(SDL_SCANCODE_ESCAPE)) m_quit = true;
+
+	if (m_scene) m_scene->Update();
 
 	GetSystem<Renderer>()->BeginFrame();
-	m_scene->Draw();
+	if (m_scene) m_scene->Draw();
 	GetSystem<Renderer>()->EndFrame();
+}
+
+bool Engine::LoadScene(const char* scene_name)
+{
+	m_scene = new Scene();
+	m_scene->Create("scene", this);
+
+	rapidjson::Document document;
+	json::load(scene_name, document);
+	m_scene->Load(document);
+	m_scene->Initialize();
+
+	return true;
+}
+
+void Engine::DestroyScene()
+{
+	if (m_scene) {
+		m_scene->Destroy();
+		delete m_scene;
+		m_scene = nullptr;
+	}
 }

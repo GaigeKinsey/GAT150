@@ -22,5 +22,7 @@ protected:
 
 	vector2 m_force_range;
 	vector2 m_torque_range;
+
+	Handle m_collision_event;
 };
 

@@ -8,6 +8,9 @@
     <Filter Include="source\components">
       <UniqueIdentifier>{09940b77-6303-4abe-83ce-e07ca71d1ae6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\components\render">
+      <UniqueIdentifier>{03d1add6-5e0f-4f0a-be3c-b5b417551f14}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engine.cpp">
@@ -18,9 +21,6 @@
     </ClCompile>
     <ClCompile Include="scene.cpp">
       <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="sprite_component.cpp">
-      <Filter>source\components</Filter>
     </ClCompile>
     <ClCompile Include="controller_component.cpp">
       <Filter>source\components</Filter>
@@ -40,10 +40,19 @@
     <ClCompile Include="circle_collision_component.cpp">
       <Filter>source\components</Filter>
     </ClCompile>
-    <ClCompile Include="sprite_animation_component.cpp">
-      <Filter>source\components</Filter>
-    </ClCompile>
     <ClCompile Include="text_component.cpp">
+      <Filter>source\components\render</Filter>
+    </ClCompile>
+    <ClCompile Include="sprite_animation_component.cpp">
+      <Filter>source\components\render</Filter>
+    </ClCompile>
+    <ClCompile Include="sprite_component.cpp">
+      <Filter>source\components\render</Filter>
+    </ClCompile>
+    <ClCompile Include="render_component.cpp">
+      <Filter>source\components\render</Filter>
+    </ClCompile>
+    <ClCompile Include="emitter_component.cpp">
       <Filter>source\components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -69,12 +78,6 @@
     <ClInclude Include="controller_component.h">
       <Filter>source\components</Filter>
     </ClInclude>
-    <ClInclude Include="render_component.h">
-      <Filter>source\components</Filter>
-    </ClInclude>
-    <ClInclude Include="sprite_component.h">
-      <Filter>source\components</Filter>
-    </ClInclude>
     <ClInclude Include="asteroid_component.h">
       <Filter>source\components</Filter>
     </ClInclude>
@@ -94,9 +97,18 @@
       <Filter>source\components</Filter>
     </ClInclude>
     <ClInclude Include="sprite_animation_component.h">
-      <Filter>source\components</Filter>
+      <Filter>source\components\render</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite_component.h">
+      <Filter>source\components\render</Filter>
     </ClInclude>
     <ClInclude Include="text_component.h">
+      <Filter>source\components\render</Filter>
+    </ClInclude>
+    <ClInclude Include="render_component.h">
+      <Filter>source\components\render</Filter>
+    </ClInclude>
+    <ClInclude Include="emitter_component.h">
       <Filter>source\components</Filter>
     </ClInclude>
   </ItemGroup>

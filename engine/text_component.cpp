@@ -21,6 +21,8 @@ void TextComponent::Destroy()
 
 bool TextComponent::Load(const rapidjson::Value& value)
 {
+	RenderComponent::Load(value);
+
 	json::get_name(value, "font_name", m_font_name);
 	json::get_color(value, "color", m_color);
 	json::get_vector2(value, "origin", m_origin);

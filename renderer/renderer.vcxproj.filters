@@ -22,6 +22,12 @@
     <ClInclude Include="text.h">
       <Filter>source</Filter>
     </ClInclude>
+    <ClInclude Include="particle.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="particle_system.h">
+      <Filter>source</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="color.cpp">
@@ -37,6 +43,9 @@
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="text.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="particle_system.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>

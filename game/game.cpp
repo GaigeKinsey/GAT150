@@ -1,10 +1,14 @@
 #include "game.h"
 #include "..\\engine\scene.h"
+#include "..\\engine\text_component.h"
 #include <iostream>
 
 bool Game::Startup()
 {
 	bool success = m_engine->Startup();
+
+	m_score_event = m_engine->GetSystem<EntityEventDispatcher>()->Subscribe("score", std::bind(&Game::OnScore, this, std::placeholders::_1));
+
 	m_state_machine = new StateMachine<Game>(this);
 
 	{
@@ -28,9 +32,10 @@ bool Game::Startup()
 
 void Game::Shutdown()
 {
+	delete m_state_machine;
+
 	m_engine->Shutdown();
 	delete m_engine;
-	delete m_state_machine;
 }
 
 void Game::Update()
@@ -76,5 +81,10 @@ void Game::StartState_Update()
 
 bool Game::OnScore(const Event<Entity>& event)
 {
-	return false;
+	m_score += event.data[0].as_int;
+	Entity* entity = m_engine->GetScene()->GetEntityWithName("total_score");
+	std::string score = std::to_string(m_score);
+	entity->GetComponent<TextComponent>()->SetText(score.c_str());
+
+	return true;
 }

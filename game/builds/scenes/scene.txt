@@ -4,6 +4,7 @@
 		"name": "player",
 		"type": "entity",
 		"spawner": false,
+		"lifetime": 0.0,
 		"transform": {
 		"position": [400.0, 300.0],
 		"rotation": 0.0,
@@ -13,7 +14,8 @@
 			{
 			"type": "sprite_component",
 			"texture_name": "textures/playerShip1_blue.png",
-			"origin": [0.5, 0.5]
+			"origin": [0.5, 0.5],
+			"z": 100
 			},
 			{
 			"type": "controller_component"
@@ -38,6 +40,7 @@
 	{
 		"name": "asteroid",
 		"type": "entity",
+		"lifetime": 0.0,
 		"spawner": true,
 		"transform": {
 		"position": [100.0, 200.0],
@@ -48,7 +51,8 @@
 			{
 			"type": "sprite_component",
 			"texture_name": "textures/meteorGrey_big2.png",
-			"origin": [0.5, 0.5]
+			"origin": [0.5, 0.5],
+			"z": 50
 			},
 			{
 			"type": "physics_component",
@@ -71,6 +75,7 @@
 	{
 		"name": "laser",
 		"type": "entity",
+		"lifetime": 1.0,
 		"tag": "player_weapon",
 		"spawner": true,
 		"transform": {
@@ -82,7 +87,8 @@
 			{
 			"type": "sprite_component",
 			"texture_name": "textures/laserBlue01.png",
-			"origin": [0.5, 0.0]
+			"origin": [0.5, 0.0],
+			"z": 60
 			},
 			{
 			"type": "physics_component",
@@ -94,8 +100,7 @@
 			{
 			"type" : "weapon_component",
 			"force": 700.0,
-			"rate": 0.5,
-			"lifetime": 1.0
+			"rate": 0.5
 			},
 			{
 			"type": "circle_collision_component",
@@ -106,6 +111,7 @@
 	{
 		"name": "explosion",
 		"type": "entity",
+		"lifetime": 0.0,
 		"tag": "fx",
 		"spawner": true,
 		"transform": {
@@ -117,13 +123,49 @@
 			{
 			"type": "sprite_animation_component",
 			"texture_name": "textures/explosion.png",
-			"origin": [0.5, 0.0]
+			"origin": [0.5, 0.0],
+			"z": 80
+			},
+			{
+			"type": "emitter_component",
+			"texture_name": "textures/meteorGrey_med1.png",
+			"lifetime": 0.25,
+			"spawn_rate": 0.01,
+			"scale": [0.5, 0.5],
+			"lifetime_range": [0.2, 0.4],
+			"velocity_range": [100.0, 200.0],
+			"angle_range": [0.0, 360.0],
+			"damping": 1.0
+			}
+		]
+	},
+	{
+		"name": "total_score",
+		"type": "entity",
+		"lifetime": 0.0,
+		"tag": "ui",
+		"spawner": false,
+		"transform": {
+		"position": [770.0, 20.0],
+		"rotation": 0.0,
+		"scale": [0.5, 0.5]
+		},
+		"components": [
+			{
+			"type": "text_component",
+			"font_name": "fonts/emulogic.ttf",
+			"texture_name_base": "text_texture",
+			"color": [1.0, 0.0, 0.0],
+			"text": "00000",
+			"origin": [0.7, 0.7],
+			"z": 1000
 			}
 		]
 	},
 	{
 		"name": "score",
 		"type": "entity",
+		"lifetime": 0.5,
 		"tag": "ui",
 		"spawner": true,
 		"transform": {
@@ -138,7 +180,28 @@
 			"texture_name_base": "text_texture",
 			"color": [1.0, 0.0, 0.0],
 			"text": "100",
-			"origin": [0.5, 0.5]
+			"origin": [0.5, 0.5],
+			"z": 1000
+			}
+		]
+	},
+	{
+		"name": "background",
+		"type": "entity",
+		"lifetime": 0.0,
+		"tag": "background",
+		"spawner": false,
+		"transform": {
+		"position": [400.0, 300.0],
+		"rotation": 0.0,
+		"scale": [1.0, 1.0]
+		},
+		"components": [
+			{
+			"type": "sprite_component",
+			"texture_name": "textures/space02.jpg",
+			"origin": [0.5, 0.5],
+			"z": 0
 			}
 		]
 	}

@@ -1,5 +1,6 @@
 #include "engine.h"
 #include "scene.h"
+#include "..\\renderer\particle_system.h"
 #include "..\\core\filesystem.h"
 #include "..\\core\name.h"
 
@@ -22,6 +23,9 @@ bool Engine::Startup()
 	InputSystem* input = new InputSystem(this);
 	input->Startup();
 	m_systems.push_back(input);
+
+	ParticleSystem* particle_system = new ParticleSystem(this);
+	m_systems.push_back(particle_system);
 
 	m_resource_manager = new ResourceManager<Resource>(renderer);
 
@@ -69,6 +73,7 @@ void Engine::Update()
 
 	GetSystem<Renderer>()->BeginFrame();
 	if (m_scene) m_scene->Draw();
+	GetSystem<ParticleSystem>()->Draw();
 	GetSystem<Renderer>()->EndFrame();
 }
 

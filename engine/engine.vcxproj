@@ -154,10 +154,12 @@
     <ClCompile Include="asteroid_component.cpp" />
     <ClCompile Include="circle_collision_component.cpp" />
     <ClCompile Include="controller_component.cpp" />
+    <ClCompile Include="emitter_component.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="physics_component.cpp" />
     <ClCompile Include="player_component.cpp" />
+    <ClCompile Include="render_component.cpp" />
     <ClCompile Include="scene.cpp" />
     <ClCompile Include="sprite_animation_component.cpp" />
     <ClCompile Include="sprite_component.cpp" />
@@ -170,6 +172,7 @@
     <ClInclude Include="collision_component.h" />
     <ClInclude Include="component.h" />
     <ClInclude Include="controller_component.h" />
+    <ClInclude Include="emitter_component.h" />
     <ClInclude Include="engine.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="object.h" />

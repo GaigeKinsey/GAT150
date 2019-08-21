@@ -7,6 +7,7 @@
 
 void AsteroidComponent::Destroy()
 {
+	m_owner->GetScene()->GetEngine()->GetSystem<EntityEventDispatcher>()->Unsubscribe("collision", m_collision_event);
 }
 
 bool AsteroidComponent::Load(const rapidjson::Value& value)
@@ -19,7 +20,7 @@ bool AsteroidComponent::Load(const rapidjson::Value& value)
 
 void AsteroidComponent::Initialize()
 {
-	m_owner->GetScene()->GetEngine()->GetSystem<EntityEventDispatcher>()->Subscribe("collision",
+	m_collision_event = m_owner->GetScene()->GetEngine()->GetSystem<EntityEventDispatcher>()->Subscribe("collision",
 		std::bind(&AsteroidComponent::OnCollision, this, std::placeholders::_1));
 
 	float force = g_random(m_force_range[0], m_force_range[1]);

@@ -10,6 +10,7 @@
 #include "player_component.h"
 #include "circle_collision_component.h"
 #include "text_component.h"
+#include "emitter_component.h"
 #include "..\\renderer\text.h"
 
 void Scene::Initialize()
@@ -31,11 +32,8 @@ bool Scene::Create(const Name& name, Engine* engine)
 	m_object_factory->Register("player_component", new Creator<PlayerComponent, Object>());
 	m_object_factory->Register("circle_collision_component", new Creator<CircleCollisionComponent, Object>());
 	m_object_factory->Register("text_component", new Creator<TextComponent, Object>());
+	m_object_factory->Register("emitter_component", new Creator<EmitterComponent, Object>());
 	m_object_factory->Register("entity", new Creator<Entity, Object>());
-
-	//m_text = m_engine->GetResourceManager()->Get<Text>("fonts/robotomonoregular.ttf");
-	//m_text->SetColor(color::white);
-	//m_text->SetText("Hello World!");
 
 	return true;
 }
@@ -121,13 +119,22 @@ void Scene::Update()
 
 void Scene::Draw()
 {
+	std::vector<RenderComponent*> render_components;
+
 	for (Entity* entity : m_entities) {
 		if (entity->m_state.test(Entity::eState::VISIBLE)) {
-			entity->Draw();
+			RenderComponent* render_component = entity->GetComponent<RenderComponent>();
+			if (render_component) {
+				render_components.push_back(render_component);
+			}
 		}
 	}
 
-	//m_text->Draw(vector2(300.0f, 300.0f));
+	std::sort(render_components.begin(), render_components.end(), RenderComponent::SortZ);
+	for (RenderComponent* render_component : render_components) {
+		render_component->Draw();
+	}
+
 }
 
 void Scene::Add(Entity* entity)

@@ -68,6 +68,7 @@ protected:
 	Name m_tag;
 	Scene* m_scene;
 	bool m_spawner;
+	float m_lifetime;
 
 	std::vector<Component*> m_components;
 };

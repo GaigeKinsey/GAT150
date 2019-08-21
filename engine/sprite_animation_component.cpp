@@ -29,6 +29,8 @@ void SpriteAnimationComponent::Destroy()
 
 bool SpriteAnimationComponent::Load(const rapidjson::Value& value)
 {
+	RenderComponent::Load(value);
+
 	json::get_name(value, "texture_name", m_texture_name);
 	json::get_vector2(value, "origin", m_origin);
 

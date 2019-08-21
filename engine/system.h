@@ -13,6 +13,7 @@ public:
 	virtual void Update() {}
 
 	Engine* GetEngine() { return m_engine; }
+
 private:
 	Engine* m_engine;
 };

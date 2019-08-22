@@ -4,6 +4,7 @@
 		"name": "player",
 		"type": "entity",
 		"spawner": false,
+		"state": "ACTIVE|VISIBLE",
 		"lifetime": 0.0,
 		"transform": {
 		"position": [400.0, 300.0],
@@ -40,6 +41,7 @@
 	{
 		"name": "asteroid",
 		"type": "entity",
+		"state": "ACTIVE|VISIBLE",
 		"lifetime": 0.0,
 		"spawner": true,
 		"transform": {
@@ -75,6 +77,7 @@
 	{
 		"name": "laser",
 		"type": "entity",
+		"state": "ACTIVE|VISIBLE|TRANSIENT",
 		"lifetime": 1.0,
 		"tag": "player_weapon",
 		"spawner": true,
@@ -111,6 +114,7 @@
 	{
 		"name": "explosion",
 		"type": "entity",
+		"state": "ACTIVE|VISIBLE",
 		"lifetime": 0.0,
 		"tag": "fx",
 		"spawner": true,
@@ -123,14 +127,14 @@
 			{
 			"type": "sprite_animation_component",
 			"texture_name": "textures/explosion.png",
-			"origin": [0.5, 0.0],
+			"origin": [0.5, 0.5],
 			"z": 80
 			},
 			{
 			"type": "emitter_component",
 			"texture_name": "textures/meteorGrey_med1.png",
-			"lifetime": 0.25,
-			"spawn_rate": 0.01,
+			"lifetime": 0.5,
+			"spawn_rate": 0.05,
 			"scale": [0.5, 0.5],
 			"lifetime_range": [0.2, 0.4],
 			"velocity_range": [100.0, 200.0],
@@ -142,6 +146,7 @@
 	{
 		"name": "total_score",
 		"type": "entity",
+		"state": "ACTIVE|VISIBLE",
 		"lifetime": 0.0,
 		"tag": "ui",
 		"spawner": false,
@@ -165,6 +170,7 @@
 	{
 		"name": "score",
 		"type": "entity",
+		"state": "ACTIVE|VISIBLE|TRANSIENT",
 		"lifetime": 0.5,
 		"tag": "ui",
 		"spawner": true,
@@ -188,6 +194,7 @@
 	{
 		"name": "background",
 		"type": "entity",
+		"state": "ACTIVE|VISIBLE",
 		"lifetime": 0.0,
 		"tag": "background",
 		"spawner": false,

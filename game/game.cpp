@@ -5,6 +5,7 @@
 
 bool Game::Startup()
 {
+	g_timer.tick();
 	bool success = m_engine->Startup();
 
 	m_score_event = m_engine->GetSystem<EntityEventDispatcher>()->Subscribe("score", std::bind(&Game::OnScore, this, std::placeholders::_1));
@@ -25,7 +26,7 @@ bool Game::Startup()
 		m_state_machine->AddState("start", state);
 	}
 
-	m_state_machine->SetState("title");
+	m_state_machine->SetState("start");
 
 	return success;
 }

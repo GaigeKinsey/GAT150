@@ -9,7 +9,7 @@ class Component;
 class Entity : public Object
 {
 public:
-	enum eState : u8 {
+	enum eState {
 		ACTIVE,
 		VISIBLE,
 		DESTROY,
@@ -17,8 +17,8 @@ public:
 	};
 
 public:
-	Entity() : m_scene(nullptr), m_spawner(false) {}
-	Entity(Scene* owner) : m_scene(owner), m_spawner(false) {}
+	Entity() : m_scene(nullptr), m_spawner(false), m_lifetime(0.0f) {}
+	Entity(Scene* owner) : m_scene(owner), m_spawner(false), m_lifetime(0.0f) {}
 	Entity(const Entity& entity);
 
 	bool Create(const Name& name, Scene* scene);
@@ -62,7 +62,7 @@ protected:
 
 public:
 	transform m_transform;
-	std::bitset<8> m_state = BIT(ACTIVE) | BIT(VISIBLE);
+	bit_mask_t m_state = BIT(ACTIVE) | BIT(VISIBLE);
 
 protected:
 	Name m_tag;

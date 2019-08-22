@@ -40,6 +40,7 @@
     <ClInclude Include="name.h" />
     <ClInclude Include="pool_allocator.h" />
     <ClInclude Include="random.h" />
+    <ClInclude Include="reflection.h" />
     <ClInclude Include="ref_count.h" />
     <ClInclude Include="ref_ptr.h" />
     <ClInclude Include="smart_ptr.h" />

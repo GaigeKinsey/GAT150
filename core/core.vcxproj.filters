@@ -84,5 +84,8 @@
     <ClInclude Include="handle.h">
       <Filter>source</Filter>
     </ClInclude>
+    <ClInclude Include="reflection.h">
+      <Filter>source</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

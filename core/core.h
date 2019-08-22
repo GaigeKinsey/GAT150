@@ -9,6 +9,8 @@
 #include "filesystem.h"
 #include "handle.h"
 #include "json.h"
+#include "string.h"
+#include "reflection.h"
 
 #include <bitset>
 

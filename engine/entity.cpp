@@ -43,7 +43,22 @@ bool Entity::Load(const rapidjson::Value& value)
 	json::get_name(value, "tag", m_tag);
 	json::get_bool(value, "spawner", m_spawner);
 	json::get_float(value, "lifetime", m_lifetime);
-	if (m_lifetime > 0.0f) m_state[Entity::eState::TRANSIENT] = 1;
+
+	std::string string;
+	json::get_string(value, "state", string);
+	
+	std::vector<std::string> strings;
+	
+	tokenize(string, '|', strings);
+
+	property_t<eState> properties[] = {
+		REFLECT_ENUM(ACTIVE),
+		REFLECT_ENUM(VISIBLE),
+		REFLECT_ENUM(DESTROY),
+		REFLECT_ENUM(TRANSIENT)
+	};
+
+	m_state |= CreateBitMask<property_t<eState>>(properties, sizeof(properties) / sizeof(property_t<eState>), strings);
 
 	const rapidjson::Value& transform_value = value["transform"];
 	if (transform_value.IsObject()) {
@@ -67,7 +82,7 @@ void Entity::Initialize()
 
 void Entity::Update()
 {
-	if (m_state.test(Entity::eState::TRANSIENT)) {
+	if (m_state[TRANSIENT]) {
 		m_lifetime -= g_timer.dt();
 
 		if (m_lifetime <= 0.0f) {
